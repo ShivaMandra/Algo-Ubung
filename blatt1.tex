@@ -1,0 +1,127 @@
+\documentclass{article}
+
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\begin{document}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf \"Ubungen zur Algorithmen\\
+WSI f\"ur Informatik\\
+Prof. Kaufmann/G\"uler/Skupin
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2017\\
+Universit\"at T\"ubingen\\
+18.4.2017
+\end{flushright}
+\end{minipage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+\vspace*{1cm}
+
+\begin{center}
+
+\textbf{ \Large  Blatt 1} \\ 
+\textbf{Abgabe am 25.04.2016}
+
+\end{center}
+
+\vskip 0.5cm
+
+\noindent{\bf Aufgabe 1.}  \quad\textbf{(Laufzeiten und Eingabegrö{\ss}en)} \quad(5+3 Punkte)\\
+
+\noindent
+Gegeben sei die folgende Menge $\mathcal F$ an Funktionen $f \colon \mathbb N \rightarrow \mathbb N$:
+\[
+\mathcal F = \{100, \log n, n \log n, n^2, 2^n, (2.2)^n\}
+\]
+Sei $\mathcal T$ eine Menge von Rechenschritten, die Sie für das Berechnen des Ergebnis' investieren wollen:
+\[
+\mathcal T = \{10.000, 100.000, 1.000.000\}
+\]
+\begin{enumerate}
+\item Geben Sie in einer Tabelle für alle Funktionen $f\in \mathcal F$ und alle Rechenschritte $T \in \mathcal T$ das höchste $n \in \mathbb N$ an, so dass $f(n) \leq T$.
+\item Dank neuester Entwicklungen wurde die Geschwindigkeit von Computern verdoppelt. Wenn Sie bisher bereit waren 1.000.000 Rechenschritte zu investieren, investieren Sie nun 2.000.000 Rechenschritte. Geben Sie für die Funktionen $f\in \mathcal F$ das maximale $n \in \mathbb N$ an, so dass $f(n)<2.000.000$.
+Geben Sie für alle $f \in \mathcal F$ jeweils die Differenz und den Faktor zu dem $n$ für 1.000.000 Rechenschritte aus Teilaufgabe a) an.
+
+\end{enumerate}
+
+\bigskip
+\noindent{\bf Aufgabe 2.}  \quad\textbf{(Funktionenwachstum und O-Notation)} \quad(1+3+6 Punkte)\\
+
+\noindent
+Zur Erinnerung: Für zwei Funktionen $f,g\colon \mathbb N \rightarrow \mathbb R $ schreiben wir $f \in O(g)$, falls
+ $$\exists c > 0, \exists n_0 > 0 \forall n \geq n_0: f(n)\leq c\cdot g(n).$$ 
+\begin{enumerate}
+\item Zeigen Sie, dass  $f \in O(f)$
+\item Beweisen Sie $O(f) = \bigcup \limits_{g \in O(f)} O(g)$
+%\item $O(f(n))+O(f(n)) = O(f(n))$, d.h., beweisen Sie die Abgeschlossenheit der $O$-Notation unter Addition der Elemente.
+\item Das Maximum zweier Funktionen ist folgendermaßen definiert:
+  $$\max(f, g)(n) =
+  \left\{
+    \begin{aligned}
+      &f(n) && \text{falls } f(n) > g(n),\\
+      &g(n) &&\text{sonst.}
+    \end{aligned}
+  \right.$$ 
+Wir definieren die Menge $O(f) + O(g)$ als:
+$$
+O(f) + O(g) :=
+\left\{
+h \ |\  \exists f^\prime \in O(f)\ \exists g^\prime \in O(g): h = f^\prime + g^\prime
+\right\}
+$$
+Zeigen Sie, dass $O(f) + O(g) = O(\max(g,f))$
+\end{enumerate}
+
+\newpage
+
+\noindent{\bf Aufgabe 3.}  \quad\textbf{(Rekursionsgleichungen)} \quad(2+ 8 Punkte)
+\begin{enumerate}
+\item Lösen Sie folgende Rekursionsgleichungen mit Hilfe des Mastertheorems:
+  \begin{enumerate}
+  \item $T(n)=T\left(\frac{9}{10} n\right) + n$
+  \item $T(n)=9   T\left(\frac{n}{3}\right) + n$
+  \end{enumerate}
+\item Finden Sie für $T(n)$ eine geschlossene Form ohne das Mastertheorem und beweisen Sie die Korrektheit mittels Induktion. Sie dürfen bei a) annehmen, dass $n$ gerade ist, bei b)  und c)
+ annehmen, dass $n$ eine Zweierpotenz ist und bei d) annehmen, dass $n=(\frac{4}{3})^k$ für ein $k \in \mathbb N$.\\
+Für alle Teilaufgaben außer a) gilt $T(1)=1$.
+  \begin{enumerate}
+  \item $T(n) = T(n-2) + 2n$ (mit $T(0)=0$)
+  \item $T(n)=8 T\left(\frac{n}{2}\right) + n^2$
+  \item $T(n)=n T\left(\frac{n}{2}\right)$
+  \item $T(n) = 2T(\frac{3}{4}n) + 1$
+  % \item $T(n)= n T(\sqrt{n}) + n^2$
+  % \item $T(n)= \sqrt{n} T(\sqrt{n}) + n$
+  \end{enumerate}
+\end{enumerate}
+% \bigskip
+% \noindent{\bf Aufgabe 4.}  \quad\textbf{(Master-Theorem)}\\
+% Geben Sie eine Rekursionsgleichung $T(n)$ an, so dass
+% \begin{enumerate}
+% \item $T(n)\in \Theta (n^2)$
+% \item $T(n) \in \Theta (n \log(n))$
+% \end{enumerate}
+
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
