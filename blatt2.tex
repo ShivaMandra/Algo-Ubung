@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{algorithmic}
+\usetikzlibrary{automata,arrows}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\begin{document}
+\thispagestyle{empty}
+\noindent
+\begin{minipage}[t]{0.6\textwidth}
+\begin{flushleft}
+\bf Übungen zur Algorithmen\\
+WSI für Informatik\\
+Prof. Kaufmann/Güler/Skupin
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+\begin{flushright}
+\bf Sommersemester 2017\\
+Universität Tübingen\\
+\today
+\end{flushright}
+\end{minipage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+\vspace*{.3cm}
+
+\begin{center}
+
+\textbf{ \Large  Blatt 2} \\ 
+\textbf{Abgabe {\color{red} in Zweier- oder Dreiergruppen} am 04.05.2017}
+
+\end{center}
+
+\vskip 0.3cm
+
+\noindent{\bf Aufgabe 1}  \quad\textbf{(Binäre Suche)} \quad(1+1+1+1{,}5+1{,}5 Punkte)
+
+\noindent
+Stellen Sie sich ein Hochhaus mit $n=169$ Stockwerken vor, nummeriert von 1 bis 169. Es geht die Legende um, dass \textbf{ab} einem Stockwerk $1\leq k \leq 169$ die Glühbrine zerbricht und für alle Stockwerke unterhalb unversehrt bleibt. Sie haben nur zwei Glühbirnen zur Verfügung, um herauszufinden, welches $k$ das Stockwerk bezeichnet, ab dem die Glühbirnen bei ihrem Sturz aus dem Fenster zerbrechen. Die {\bf einzige Methode}, die Sie dabei anwenden dürfen, ist, dass Sie eine heile Glühbirne aus beliebigen Stockwerken werfen dürfen, d.h., spätestens dann, wenn die zweite Glühbirne zerbricht, müssen Sie $k$ kennen.
+\begin{enumerate}
+\item Begründen Sie, warum Sie höchstens $168$ Versuche brauchen.
+\item Zeigen Sie, dass Sie höchstens $85$ Versuche brauchen.
+\item Zeigen Sie, dass unter $26$ Versuche ausreichen.
+\item Wie viele Versuche brauchen Sie minimal? 
+\item Verallgemeinern Sie den Ansatz der vorherigen Teilaufgabe für allgemeines $n$ (Anzahl der Stockwerke). 
+\end{enumerate}
+
+\noindent{\bf Aufgabe 2}  \quad\textbf{(Implementierung von Suchalgorithmen)} \quad(3+4+4+4 Punkte)\\
+Laden Sie die Java-Vorlage und die Datei mit sortierten Zahlen aus dem Moodle herunter und implementieren Sie die fehlenden Funktionen.
+\begin{enumerate}
+\item Implementieren Sie die Funktion \texttt{readInput(String path)} die einen Dateipfad (\texttt{args[0]}) zur Zahlenliste bekommt und das Feld der Klasse mit den Zahlen füllt.\\
+Verwenden Sie dazu die Klasse \texttt{BufferedReader}.
+\item Implementieren Sie die Lineare Suche in \texttt{linSearch(int key)}. Der Schlüssel nach dem gesucht wird soll in der \texttt{main(String args)}-Methode über \texttt{args[1]} übergeben werden können.
+\item Implementieren Sie die Binäre Suche in \texttt{binSearch(int key)}.
+\item Implementieren Sie die Interpolationssuche in \texttt{interpolSearch(int key)}.
+\end{enumerate}
+{\color{red} \bf Verwenden Sie bei Ihrer Implementierung sinnvolle Variablennamen und kommentieren Sie Ihren Code! Laden Sie Ihre \texttt{Main.java} ins Moodle. Nicht kompilierende Abgaben werden \textbf{mit 0 Punkten} bewertet.}\\
+\textit{Schreiben Sie geeignete Testfälle, um Ihre Funktionen zu testen.}
+
+
+\bigskip
+\noindent{\bf Aufgabe 3.}  \quad\textbf{(Rekursionsgleichungen)} \quad(4 + 3 Punkte) \\
+Für Algorithmus $A$ ist die Laufzeit in expliziter Form
+\[
+T_A(n) = (\log_8(n) + 1) \cdot n
+\]
+gegeben.
+Offensichtlich gilt dabei $T_A(1) = 1$.
+Die Laufzeit für Algorithmus $B$ ist in Form einer Rekursionsgleichung mit Parameter $\alpha \in \mathbb{R}_+$ gegeben mittels
+\[
+T_B(n) = 8 T_B\left(\frac{n}{8}\right)  + n^{\alpha}.
+\]
+\begin{enumerate}
+  \item Ermitteln Sie eine geschlossene Form der Rekursionsgleichung für $B$ mittels Induktion und begründen Sie dann damit Ihre Aussage. Nehmen Sie an, dass $n$ eine Achterpotenz und $T_B(1)=1$ ist.
+  \item Für welche Werte von $\alpha$ ist der Algorithmus $A$ schneller als $B$? Beweisen Sie Ihre Aussage. 
+\end{enumerate}
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
