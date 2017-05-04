@@ -28,10 +28,10 @@
 
 \input kvmacros
 
-%Größe der Ränder setzen
+%GrÃ¶ÃŸe der RÃ¤nder setzen
 \geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
 
-%Kopf- und Fußzeile
+%Kopf- und FuÃŸzeile
 \pagestyle {fancy}
 \fancyhead[L]{Tutor: Benjamin Coban}
 \fancyhead[C]{Theoretische Informatik}
@@ -42,16 +42,16 @@
 \fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
 
 
-%Formatierung der Überschrift, hier nichts ändern
+%Formatierung der Ãœberschrift, hier nichts Ã¤ndern
 \def\header#1#2{
 \begin{center}
-{\Large\bf �bungsblatt #1} %Blatt eintragen
+{\Large\bf Übungsblatt #1} %Blatt eintragen
 
 {(Abgabetermin #2)}
 \end{center}
 }
 
-%Definition der Punktetabelle, hier nichts ändern
+%Definition der Punktetabelle, hier nichts Ã¤ndern
 \newcounter{punktelistectr}
 \newcounter{punkte}
 \newcommand{\punkteliste}[2]{%
@@ -120,6 +120,7 @@ Merle Kammer
 \subsection*{e)}
 
 \section*{Aufgabe 2}
+siehe zweite Datei
 
 \section*{Aufgabe 3}
 Laufzeit von Algorithmus A: $T_A(n)=(\log_{8}n+1)\cdot n$ mit $T_A(1)=1$\\
@@ -132,7 +133,7 @@ T_B(n)&=8T_B(\frac{n}{8})+n^{\alpha}\\
 &=8(8(8T_B(\frac{n}{512})+(\frac{n}{64})^{\alpha})+(\frac{n}{8})^{\alpha})+n^{\alpha}\\
 & \ \ \vdots\\
 &=8^i \cdot  T_B(\frac{n}{8^i}) + \sum_{k=0}^{i-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
-&\textrm{f�r } i = \log_{8}n \textrm{ gilt:}\\
+&\textrm{für } i = \log_{8}n \textrm{ gilt:}\\
 &=8^{\log_{8}n} \cdot  T_B(\frac{n}{8^{\log_{8}n}}) + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
 &=n \cdot  T_B(1) + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
 &\textrm{Da: } n=8^x \textrm{ angenommen werden soll, gilt:}\\
@@ -140,7 +141,7 @@ T_B(n)&=8T_B(\frac{n}{8})+n^{\alpha}\\
 &=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})
 \end{align*}
 Behauptung: $T_B(n)=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})$\\
-Beweis durch vollst�ndige Induktion:\\
+Beweis durch vollständige Induktion:\\
 Induktionsanfang: $T(1)=1$, denn $8^{0} + \sum_{k=0}^{0-1} (8^k \cdot (\frac{8^0}{8^k})^{\alpha})=1 + \sum_{k=0}^{-1} (8^k \cdot (\frac{1}{8^k})^{\alpha})=1 \ \surd$\\
 Induktionsvorraussetzung: Sei $n=8^x$ mit $x \in \mathbb{N}_0$ und es gelte $T(8^x)=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})$\\
 Induktionsbehauptung: Es gilt $T(8^{x+1})=8^{x+1} + \sum_{k=0}^{(x+1)-1} (8^k \cdot (\frac{8^x+1}{8^k})^{\alpha})$\\
@@ -172,17 +173,17 @@ T_B(n)&=n + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{1})\\
 &=n+((\log_{8}n-1)-0+1)n\\
 &=n+n\cdot \log_{8}n = T_A(n)
 \end{align*}
-F�r $\alpha =1$ sind die Algorithmen A und B somit gleich schnell. Wir �berpr�fen daher im Folgenden die F�lle $\alpha <1$ und $\alpha >1$ um zu bestimmen, wann der Algorithmus A schneller als B ist.\\
-Wir verwenden dabei das Mastertheorem um die Laufzeit von $T_B(n)$ in Abh�ngigkeit von $\alpha$ zu bestimmen: $T_B(n)=8T_B(\frac{n}{8})+n^{\alpha} \Rightarrow a=8, b=8, f(n)=n^{\alpha}$ und $\log_{b}a=\log_{8}8=1$\\
+Für $\alpha =1$ sind die Algorithmen A und B somit gleich schnell. Wir überprüfen daher im Folgenden die Fälle $\alpha <1$ und $\alpha >1$ um zu bestimmen, wann der Algorithmus A schneller als B ist.\\
+Wir verwenden dabei das Mastertheorem um die Laufzeit von $T_B(n)$ in Abhängigkeit von $\alpha$ zu bestimmen: $T_B(n)=8T_B(\frac{n}{8})+n^{\alpha} \Rightarrow a=8, b=8, f(n)=n^{\alpha}$ und $\log_{b}a=\log_{8}8=1$\\
 \\
 Fall 2: $\alpha < 1$\\
 $f(n^{\alpha})=O(n^{1- \epsilon}) \overbrace{\Rightarrow}^{\textrm{MT Fall 1}} T(n)=O(n^1)$ d.h., dass $T_B(n)\in O(n)$\\
-$T_A(n)=n\cdot \log_{8}n+n \notin O(n) \Rightarrow T_A(n) > T_B(n)$ d.h., dass Algorithmus B f�r $\alpha < 1$ schneller l�uft.\\
+$T_A(n)=n\cdot \log_{8}n+n \notin O(n) \Rightarrow T_A(n) > T_B(n)$ d.h., dass Algorithmus B für $\alpha < 1$ schneller läuft.\\
 \\
 Fall 3: $\alpha > 1$\\
-$f(n^{\alpha})=O(n^{1+ \epsilon})$ also Fall 3 des Mastertheorems. Wir �berpr�fen daher die folgende Bedingung:\\
-$a\cdot f(\frac{n}{b}) \le c \cdot f(n)$ f�r $ c<1$ und n gen�gend gro�:\\
-$8\cdot f(\frac{n}{8}) \le c \cdot f(n) \Leftrightarrow 8\frac{n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha}\Leftrightarrow \frac{8^1 \cdot n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha} \Leftrightarrow \frac{n^{\alpha}}{8^{\alpha-1}} \le c \cdot n^{\alpha}$ f�r $\frac{1}{8^{\alpha-1}} <c<1 \surd$\\
+$f(n^{\alpha})=O(n^{1+ \epsilon})$ also Fall 3 des Mastertheorems. Wir überprüfen daher die folgende Bedingung:\\
+$a\cdot f(\frac{n}{b}) \le c \cdot f(n)$ für $ c<1$ und n genügend groß:\\
+$8\cdot f(\frac{n}{8}) \le c \cdot f(n) \Leftrightarrow 8\frac{n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha}\Leftrightarrow \frac{8^1 \cdot n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha} \Leftrightarrow \frac{n^{\alpha}}{8^{\alpha-1}} \le c \cdot n^{\alpha}$ für $\frac{1}{8^{\alpha-1}} <c<1 \surd$\\
 $\overbrace{\Rightarrow}^{\textrm{MT Fall 3}} T(n)=O(n^{\alpha})$ d.h. $T_B(n) \in O(n^{\alpha})$
-$T_A(n)=n\cdot \log_{8}n+n \in O(n^{\alpha})$\\ aber $n^{\alpha} \notin O(T_A(n)) \Rightarrow T_A(n) < T_B(n)$ d.h., dass Algorithmus A f�r $\alpha > 1$ schneller ist als Algorithmus B. $\Box$
+$T_A(n)=n\cdot \log_{8}n+n \in O(n^{\alpha})$\\ aber $n^{\alpha} \notin O(T_A(n)) \Rightarrow T_A(n) < T_B(n)$ d.h., dass Algorithmus A für $\alpha > 1$ schneller ist als Algorithmus B. $\Box$
 \end{document}
