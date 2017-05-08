@@ -1,0 +1,215 @@
+\documentclass[a4paper]{scrartcl}
+
+
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{listings} 
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usetikzlibrary{trees}
+\usepackage{subfigure}
+\usepackage{float}
+ \usepackage{polynom}
+  \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage[]{algorithm2e}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\input kvmacros
+
+%GrÃ¶ÃŸe der RÃ¤nder setzen
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Kopf- und FuÃŸzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: Benjamin Coban}
+\fancyhead[C]{Theoretische Informatik}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
+
+
+%Formatierung der Ãœberschrift, hier nichts Ã¤ndern
+\def\header#1#2{
+\begin{center}
+{\Large\bf Übungsblatt #1} %Blatt eintragen
+
+{(Abgabetermin #2)}
+\end{center}
+}
+
+%Definition der Punktetabelle, hier nichts Ã¤ndern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr & 
+      } 
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+    \end{tabularx}
+  \end{center}
+}
+
+
+
+\begin{document}
+
+%Hier bitte Student 1 usw ersetzen
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+\begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Hier Namen eintragen
+%
+Stefan Fischer\\ 
+Benjamin Neidhardt\\ 
+Merle Kammer 
+\end{minipage} & \begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Die zweite Zahl durch die Anzahl der Aufgaben ersetzen
+%
+%
+\punkteliste{1}{3} %
+%
+\end{minipage}\\
+\end{tabularx}
+
+
+
+% ----------------------- TODO ---------------------------
+%
+%Hier Nummer und Datum aktualisieren
+\lhead{Nr. 2}{04.05.2017}
+
+
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+Zu Beginn wird die Glühbirne aus Stockwerk 1 geworfen. Geht sie nicht kaputt, 
+so gehen wir zu Stockwerk 2 und werfen sie von dort aus dem Fenster. Wir gehen solange die Stockwerke nach oben (lineare Suche) bis die Glühbirne zerbricht. Auf Stockwerk 168 enden wir aus folgenden Gründen:
+\\
+
+ a) geht die Glühbirne vorher oder bei Stockwerk 168 kaputt, so wurde das Stockwerk k gefunden
+ \\
+ 
+ b) geht sie bei Stockwerk 168 nicht kaputt, dann muss das Stockwerk 169 das gesuchte Stockwerk sein         (denn $1 \leq k \leq 169 $)
+\subsection*{b)}
+"Lineare Suche", nur dass die Glühbirne aus jedem zweiten Stockwerk geworfen wird. Geht sie ab einem Stockwerk kaputt, so wird nur noch das Stockwerk darunter getestet und dann ist k bestimmt.
+\subsection*{c)}
+D. h. max. 25 Versuche
+\\
+Idee: Glühbirne wird zu Beginn aus Stockwerk 25 geworfen. Geht sie kaputt, so wird anschließend die lineare Suche wie in a) durchgeführt (von Stockwerk 1-24). Geht die Glühbirne beim Wurf aus Stockwerk 25 nicht kaputt, so gehen wir 24 Stockwerke weiter und werfen die Glühbirne dort raus. Geht sie kaputt, dann führen wir erneut die lineare Suche für Stockwerk 26-48 durch. Geht sie nicht kaputt, 23 Stockwerke weitergehen usw.
+\\
+
+$25 \textsuperscript{+24}\rightarrow 49 \textsuperscript{+23}\rightarrow 72 \textsuperscript{+22}\rightarrow 94 \textsuperscript{+21}\rightarrow 115 \textsuperscript{+20}\rightarrow 135 \textsuperscript{+19}\rightarrow 154... $ 
+\subsection*{d)}
+\begin{bfseries} mit Glück: \end{bfseries} minimal 1 Versuch (Glühbirne wird aus erstem Stock geworfen und geht kaputt)
+\\
+\\
+\begin{bfseries} ohne Glück:\end{bfseries} um die minimale Anzahl rauszufinden, die man ohne Glück braucht, kann man die gaußsche Summenformel verwenden. Sie lautet $\frac{(x \cdot (x+1)}{2}$ wobei x für die Anzahl der Versuche steht. Um in unserem Beispiel das Minimum herauszufinden, stellen wir folgende Ungleichung auf $\frac{(x \cdot (x+1)}{2} > 169$. Probiert man jetzt einige Werte aus, erkennt man, dass für 18 Versuche die Ungleichung mit $171 > 169$ noch erüllt wäre. Bei 17 Versuchen ergibt sich die Gleichung $ 153 > 169$, welche schon nicht mehr erfüllt ist. Somit ist bei 18 Versuchen das Minimum erreicht. Dies könnnte man nun mit der Methode aus Aufgabe c) noch einmal Schritt für Schritt nachvollziehen.
+\subsection*{e)}
+a) für allgemeines n: höchstens n-1 Versuche
+\\
+b) für allgemeines n: $ \lceil \frac{n}{2} \rceil$ Versuche
+\\
+c) für allgemeines n: siehe d)
+\\
+d) immer 1 oder für allgemeines n:  $\lceil \frac{(x \cdot (x+1)}{2}\rceil > n$ wobei x für die Anzahl der Versuche steht und $x \in \mathbb{N}_0$
+
+\section*{Aufgabe 2}
+siehe Datei main.java
+
+\section*{Aufgabe 3}
+Laufzeit von Algorithmus A: $T_A(n)=(\log_{8}n+1)\cdot n$ mit $T_A(1)=1$\\
+Laufzeit von Algorithmus B: $T_B(n)=8T_B(\frac{n}{8})+n^{\alpha}$ mit $\alpha \in \mathbb{R}_+$
+\subsection*{a)}
+Annahmen: n ist eine Achterpotenz und $T_B(1)=1$\\
+\begin{align*}
+T_B(n)&=8T_B(\frac{n}{8})+n^{\alpha}\\
+&=8(8T_B(\frac{n}{64})+(\frac{n}{8})^{\alpha})+n^{\alpha}\\
+&=8(8(8T_B(\frac{n}{512})+(\frac{n}{64})^{\alpha})+(\frac{n}{8})^{\alpha})+n^{\alpha}\\
+& \ \ \vdots\\
+&=8^i \cdot  T_B(\frac{n}{8^i}) + \sum_{k=0}^{i-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
+&\textrm{für } i = \log_{8}n \textrm{ gilt:}\\
+&=8^{\log_{8}n} \cdot  T_B(\frac{n}{8^{\log_{8}n}}) + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
+&=n \cdot  T_B(1) + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})\\
+&\textrm{Da: } n=8^x \textrm{ angenommen werden soll, gilt:}\\
+&=8^{x} + \sum_{k=0}^{(\log_{8}8^x)-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})\\
+&=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})
+\end{align*}
+Behauptung: $T_B(n)=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})$\\
+Beweis durch vollständige Induktion:\\
+Induktionsanfang: $T(1)=1$, denn $8^{0} + \sum_{k=0}^{0-1} (8^k \cdot (\frac{8^0}{8^k})^{\alpha})=1 + \sum_{k=0}^{-1} (8^k \cdot (\frac{1}{8^k})^{\alpha})=1 \ \surd$\\
+Induktionsvorraussetzung: Sei $n=8^x$ mit $x \in \mathbb{N}_0$ und es gelte $T(8^x)=8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})$\\
+Induktionsbehauptung: Es gilt $T(8^{x+1})=8^{x+1} + \sum_{k=0}^{(x+1)-1} (8^k \cdot (\frac{8^x+1}{8^k})^{\alpha})$\\
+Beweis:
+\begin{align*}
+T(8^{x+1})&=8T_B(\frac{8^{x+1}}{8})+(8^{x+1})^{\alpha}\\
+&=8T_B(8^x\frac{8^{1}}{8})+(8^{x+1})^{\alpha}\\
+&=8T_B(8^x)+(8^{x+1})^{\alpha}\\
+&=8(8^{x} + \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha}))+(8^{x+1})^{\alpha}\\
+&=8\cdot8^{x} + 8 \cdot \sum_{k=0}^{x-1} (8^k \cdot (\frac{8^x}{8^k})^{\alpha})+(8^{x+1})^{\alpha}\\
+&=8^{x+1} + \sum_{k=0}^{x-1} (8^{k+1} \cdot (\frac{8^x}{8^k})^{\alpha})+(8^{x+1})^{\alpha}\\
+&=8^{x+1} + \sum_{k=1}^{x} (8^{k+1-1} \cdot (\frac{8^x}{8^{k-1}})^{\alpha})+(8^{x+1})^{\alpha}\\
+&=8^{x+1} + \sum_{k=1}^{x} (8^{k} \cdot (\frac{8^x\cdot 8^1}{8^{k}})^{\alpha})+(8^{x+1})^{\alpha}\\
+&=8^{x+1} + \sum_{k=1}^{x} (8^{k} \cdot (\frac{8^{x+1}}{8^{k}})^{\alpha})+(8^{x+1})^{\alpha}\\
+& \textrm{Es gilt: } (8^{x+1})^{\alpha}=(8^{0} \cdot (\frac{8^{x+1}}{8^{0}})^{\alpha})\\
+&\textrm{Daher ziehen wir } (8^{x+1})^{\alpha} \textrm{ in die Summe und verringern die Startvariabel um Eins:}\\
+&=8^{x+1} + \sum_{k=0}^{x} (8^{k} \cdot (\frac{8^{x+1}}{8^{k}})^{\alpha}) \hspace{3cm} \Box
+\end{align*}
+Somit ist bewiesen, dass $T_B(n)=8T_B(\frac{n}{8})+n^{\alpha}=n + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})$ mit $\alpha \in \mathbb{R}_+$ gilt.
+\subsection*{b)}
+$T_A(n)=(\log_{8}n+1)\cdot n$ mit $T_A(1)=1$ und $T_B(n)=n + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{\alpha})$\\
+Algorithmus A ist schneller als B $\forall \alpha > 1$.\\
+Beweis:\\
+Fall 1: $\alpha = 1$\\
+\begin{align*}
+T_B(n)&=n + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot (\frac{n}{8^k})^{1})\\
+&=n + \sum_{k=0}^{(\log_{8}n)-1} (8^k \cdot \frac{n^1}{8^k\cdot1})\\
+&=n + \sum_{k=0}^{(\log_{8}n)-1} n\\
+&=n+((\log_{8}n-1)-0+1)n\\
+&=n+n\cdot \log_{8}n = T_A(n)
+\end{align*}
+Für $\alpha =1$ sind die Algorithmen A und B somit gleich schnell. Wir überprüfen daher im Folgenden die Fälle $\alpha <1$ und $\alpha >1$ um zu bestimmen, wann der Algorithmus A schneller als B ist.\\
+Wir verwenden dabei das Mastertheorem um die Laufzeit von $T_B(n)$ in Abhängigkeit von $\alpha$ zu bestimmen: $T_B(n)=8T_B(\frac{n}{8})+n^{\alpha} \Rightarrow a=8, b=8, f(n)=n^{\alpha}$ und $\log_{b}a=\log_{8}8=1$\\
+\\
+Fall 2: $\alpha < 1$\\
+$f(n^{\alpha})=O(n^{1- \epsilon}) \overbrace{\Rightarrow}^{\textrm{MT Fall 1}} T(n)=O(n^1)$ d.h., dass $T_B(n)\in O(n)$\\
+$T_A(n)=n\cdot \log_{8}n+n \notin O(n) \Rightarrow T_A(n) > T_B(n)$ d.h., dass Algorithmus B für $\alpha < 1$ schneller läuft.\\
+\\
+Fall 3: $\alpha > 1$\\
+$f(n^{\alpha})=O(n^{1+ \epsilon})$ also Fall 3 des Mastertheorems. Wir überprüfen daher die folgende Bedingung:\\
+$a\cdot f(\frac{n}{b}) \le c \cdot f(n)$ für $ c<1$ und n genügend groß:\\
+$8\cdot f(\frac{n}{8}) \le c \cdot f(n) \Leftrightarrow 8\frac{n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha}\Leftrightarrow \frac{8^1 \cdot n^{\alpha}}{8^{\alpha}} \le c \cdot n^{\alpha} \Leftrightarrow \frac{n^{\alpha}}{8^{\alpha-1}} \le c \cdot n^{\alpha}$ für $\frac{1}{8^{\alpha-1}} <c<1 \surd$\\
+$\overbrace{\Rightarrow}^{\textrm{MT Fall 3}} T(n)=O(n^{\alpha})$ d.h. $T_B(n) \in O(n^{\alpha})$
+$T_A(n)=n\cdot \log_{8}n+n \in O(n^{\alpha})$\\ aber $n^{\alpha} \notin O(T_A(n)) \Rightarrow T_A(n) < T_B(n)$ d.h., dass Algorithmus A für $\alpha > 1$ schneller ist als Algorithmus B. $\Box$
+\end{document}
