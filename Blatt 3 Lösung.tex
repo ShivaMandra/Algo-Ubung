@@ -1,0 +1,194 @@
+\documentclass[a4paper]{scrartcl}
+
+
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{listings} 
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usetikzlibrary{trees}
+\usepackage{subfigure}
+\usepackage{float}
+ \usepackage{polynom}
+  \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage[]{algorithm2e}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\input kvmacros
+
+%Gr√∂√üe der R√§nder setzen
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Kopf- und Fu√üzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: Benjamin Coban}
+\fancyhead[C]{Theoretische Informatik}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
+
+
+%Formatierung der √úberschrift, hier nichts √§ndern
+\def\header#1#2{
+\begin{center}
+{\Large\bf ‹bungsblatt #1} %Blatt eintragen
+
+{(Abgabetermin #2)}
+\end{center}
+}
+
+%Definition der Punktetabelle, hier nichts √§ndern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr & 
+      } 
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+    \end{tabularx}
+  \end{center}
+}
+
+
+
+\begin{document}
+
+%Hier bitte Student 1 usw ersetzen
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+\begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Hier Namen eintragen
+%
+Stefan Fischer\\ 
+Benjamin Neidhardt\\ 
+Merle Kammer
+\end{minipage} & \begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Die zweite Zahl durch die Anzahl der Aufgaben ersetzen
+%
+%
+\punkteliste{1}{4} %
+%
+\end{minipage}\\
+\end{tabularx}
+
+
+
+% ----------------------- TODO ---------------------------
+%
+%Hier Nummer und Datum aktualisieren
+\header{Nr. 3}{11.05.2017}
+
+
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+\subsection*{b)}
+\subsection*{c)}
+\subsection*{d)}
+
+\section*{Aufgabe 2}
+
+\section*{Aufgabe 3}
+\subsection*{a)}
+\subsection*{b)}
+\subsection*{c)}
+\subsection*{d)}
+
+\section*{Aufgabe 4}
+$\Omega = \{1, 2, 3, 4, 5, 6\}$
+\subsection*{a)}
+\begin{itemize}
+\item[(a)] 
+Die Wahrscheinlichkeit f¸r das Ereignis $A=\{2\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{1}{6}$
+\item[(b)]
+Die Wahrscheinlichkeit f¸r das Ereignis $A=\{2, 4, 6\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}$
+\end{itemize}
+\subsection*{b)}
+Zu zeige: Falls $A \cap B = \emptyset$, dann gilt $P(A \cap B)=P(A)+P(B)$\\
+(1)
+\begin{align*}
+P(A \cup B) &\overset{(*)}{=} P((A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A))\\
+&= P(A \setminus B) + P(A \cap B) + P(B \setminus A) \ \ \leftarrow \sigma \textrm{-additivit‰t}\\
+&= \underbrace{P(A \setminus B) + P(A \cap B)}_{= P(A)} + \underbrace{P(B \setminus A) + P(A \cap B)}_{=P(B)} - P(A \cap B)\\
+&= P(A) + P(B) + P(A \cap B)\\
+&\textrm{f¸r $A \cap B = \emptyset$ gilt somit}\\
+&= P(A) + P(B) \hspace{7cm} \Box
+\end{align*}
+(*):\\
+$A \cup B = (A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A)$\\
+
+\begin{tikzpicture}[fill=gray]
+% left hand
+\scope
+\clip (-2,-2) rectangle (2,2)
+      (1,0) circle (1);
+\fill[blue!20] (0,0) circle (1);
+\endscope
+% right hand
+\fill[blue!40] (1,0)circle (1);
+\scope
+\clip (-2,-2) rectangle (2,2)
+      (0,0) circle (1);
+\fill[blue!20] (1,0) circle (1);
+\endscope
+% outline
+\draw (0,0) circle (1) (-0.5,0)  node [text=black,below] {$A\setminus B$}
+	(0,0) circle (1) (0.5, 1.5) node[text=black, below] {$A \cup B$}
+      (1,0) circle (1) (1.5,0)  node [text=black,below] {$B \setminus A$}
+      (1,0) circle (1) (0.5, 0) node[text=black, above]{$A \cap B$}
+      (-2,-2) rectangle (3,2) node [text=black,above] {$\Omega$};
+\end{tikzpicture}\\
+\\
+F¸r $A \cap B \neq \emptyset$ gilt $P(A \cup B) \le P(A)+P(B)$ denn:\\
+$P(A \cup B)=P(A) +P(B) - P(A \cap B) \leftarrow$ siehe Beweis (1)\\
+$\Rightarrow P(A \cup B) \le P(A)+P(B)$
+\subsection*{c)}
+$\Omega = \{1, 2, 3, 4, 5, 6\}^3$\\
+Das Ereignis, dass "Alle drei W¸rfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit f¸r dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
+\subsection*{d)}
+$\Omega = \{1, 2, 3, 4,5 ,6\}^2$
+\begin{itemize}
+\item[(a)]
+\begin{align*}
+[X=4]&=\{(x,y) \in \Omega \ | \ X(x,y)=4\}\\
+&=\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}
+\end{align*}
+Es werden zwei W¸rfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der W¸rfel eine 4 zeigt und die Augenzahl des anderen W¸rfels $\ge 4$ ist. Das heiﬂt das Minimum der gew¸rfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
+\item[(b)]
+$P([X=4])=P(\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
+Unter Annahme der Gleichverteilung der Ereignisse ist $P([X=4])=\frac{1}{6}$.
+\end{itemize}
+
+\end{document}
