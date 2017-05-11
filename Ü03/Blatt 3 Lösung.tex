@@ -25,13 +25,36 @@
 \usepackage{fancybox}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
+\usepackage{listings} 
+\usepackage{color}   
+\usepackage[svgnames]{xcolor} 
+\lstset{
+	language=Java, 
+   basicstyle={\small, \ttfamily},
+   keywordstyle=\color{blue!80!black!100}, 
+   identifierstyle=, 
+   commentstyle=\color{green!50!black!100}, 
+   stringstyle=\ttfamily, 
+   breaklines=true, 
+   numbers=none, 
+   numberstyle=\small, 
+   frame=tb, 
+   backgroundcolor=\color{blue!3} ,
+   aboveskip=3mm,
+   belowskip=3mm,
+   showstringspaces=false,
+   columns=flexible,
+   breaklines=trues,
+   breakatwhitespace=true,
+   tabsize=3,
+} 
 
 \input kvmacros
 
-%Größe der Ränder setzen
+%GrÃ¶ÃŸe der RÃ¤nder setzen
 \geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
 
-%Kopf- und Fußzeile
+%Kopf- und FuÃŸzeile
 \pagestyle {fancy}
 \fancyhead[L]{Tutor: Benjamin Coban}
 \fancyhead[C]{Theoretische Informatik}
@@ -42,16 +65,16 @@
 \fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
 
 
-%Formatierung der Überschrift, hier nichts ändern
+%Formatierung der Ãœberschrift, hier nichts Ã¤ndern
 \def\header#1#2{
 \begin{center}
-{\Large\bf �bungsblatt #1} %Blatt eintragen
+{\Large\bf Übungsblatt #1} %Blatt eintragen
 
 {(Abgabetermin #2)}
 \end{center}
 }
 
-%Definition der Punktetabelle, hier nichts ändern
+%Definition der Punktetabelle, hier nichts Ã¤ndern
 \newcounter{punktelistectr}
 \newcounter{punkte}
 \newcommand{\punkteliste}[2]{%
@@ -114,9 +137,103 @@ Merle Kammer
 
 \section*{Aufgabe 1}
 \subsection*{a)}
+Bubblesort:\\
+Beim Durchlaufen des Feldes werden die jeweiligen Nachbarelemente miteinander verglichen und ggf. ausgetauscht. Am Ende des ersten Laufs befindet sich das größte Element am Feldende. Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das letzte Element. Danach hat man das zweitgrößte Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Feld sortiert ist.\\
+\newline
+\begin{lstlisting} 
+{wiederhole für alle von 0 bis max:
+		setzte min := n
+				{wiederhole alle s von n+1 bis max
+			 ist a_{s} < a_{min}?
+		nein: geh zurück!
+	ja setzte min := s
+vertausche a_{min} mit a_{n}}}
+\end{lstlisting}   
+
+Beschreibung Minimumsort\\
+Laufe ab Index 1 über die gesamte Folge und merke Dir den kleinsten Wert. Vertausche diesen Wert mit dem, der in der Folge an Stelle 2 steht. Somit erhältst Du eine Folge, die bis Index 1 sortiert ist. Dann laufe ab Index 2 über diese Folge und merke Dir wieder den kleinsten Wert. Diesen vertauschst Du jetzt mit dem an Index 2 stehenden Wert. Die so entstandene neue Folge ist nun bereits bis Index 2 sortiert. Wiederhole diesen Vorgang bis Index (n-1). Nach diesen (n-1) Durchläufen erhältst Du eine vollständig sortierte Folge, und der Algorithmus ist beendet.
+\newline
+ \begin{lstlisting} 
+{double[] a ;
+			i := 1;
+				solange(i < n )
+							min := i;
+								j := i +1;
+									solange ( j <= n )
+						wenn ( Wert in  $a_{j} $ < Wert in $ a_{min} $) 
+				min := j;
+			j := j+1;
+		vertausche die Werte a_{min} und a_{i}
+i= i+1;
+
+\end{lstlisting} 
+\newpage
 \subsection*{b)}
-\subsection*{c)}
-\subsection*{d)}
+Bubblesort vorsortierte Liste:\\
+Bei einer bereits sortierten Liste wird Bubblesort die Liste nur einmal über das Array gehen müssen, um festzustellen, dass die Liste bereits sortiert ist, weil keine benachbarten Elemente vertauscht werden mussten. Daher benötigt Bubblesort   \Omega(n)  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.
+
+Minimum Sort vorsortiere Liste:\\
+Bei einer vorsortieren Liste muss MinSort mindestens einmal alle Zahlen vergleichen.  .Daher benötigt auch MinSort   \Omega{O}(n)  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.\\
+\subsection*{c + d)}}
+
+Bubblesort:\\
+Bei absteigender Sortiertung einer Liste wird in jedem Durchlauf der inneren Schleife das erste Element bis zum n - 1 Element durchgetauscht (also n -1 viele  Vertausch-Operationen) und der Wert von n um 1 reduziert. Da dies die maximale Anzahl an Vertausch-Operationen pro Iteration und die maximale Anzahl an Iterationen liefert, ist dies der Worst-Case mit der Laufzeit \Theta(n^{2}).\\
+\newline
+Insgesamt führt Bubble Sort also höchstens:\\
+
+\sum_{i=1}^{n-1} (n-i) = \sum_{j=1}^{n-1} j = \dfrac{n \cdot (n-1)}{2}
+
+Vergleiche und Vertauschungen durch.\\
+
+Beispiel Liste absteigend sortiert:\\
+\begin{array}[t]{lllrr}
+  [5 & 4] & 3 & 2 & 1\\
+  \\
+  4 & [5 & 3] & 2 & 1\\
+  4 & 3 & [5 & 2] & 1\\
+  4 & 3 & 2 & [5 & 1]\\
+  [4 & 3] & 2 & 1 & 5\\
+  3 & [4 & 2] & 1 & 5\\
+  3 & 2 & [4 & 1] & 5\\
+  3 & 2 & 1 & [4 & 5]\\
+  2 & [3 & 1] & 4 & 5\\
+  2 & 1 & [3 & 4] & 5\\
+  [2 & 1] & 3 & 4 & 5\\
+ \\
+ 1 & 2 & 3 & 4 & 5\\
+  \end{array}\\
+  
+Berechnung der Vergleiche:\\
+\dfrac{5 \cdot (5-1)}{2} = $10 Vergleiche$  \\
+\\
+$Berechnung der Vertauschungen:$:\\
+\dfrac{5 \cdot (5-1)}{2} = $10 Vertauschungen$  \\
+\newpage
+Minimum Sort:\\
+Beim Minimum Sort spielt der Inhalt des Eingabe-Arrays keine Rolle für die Anzahl an Swap-Operationen, da diese auf jeden Fall genau einmal in jeder Iteration der äußeren Schleife ausgeführt werden und die Anzahl der Iterationen nur von der Länge des Eingabe- Arrays abhängt.\\
+In der i-ten Phase benötigt MinSort n- i Vergleiche, aber nur eine Vertauschung. \\
+Insgesamt führt MinSort also höchstens:\\
+
+(n - 1) Vergleiche und Vertauschungen benötigt.\\
+
+Beispiel Liste absteigend sortiert:\\
+\begin{array}[t]{lllrr}
+  5 & 4 & 3 & 2 & [1]\\
+  \\
+  [1] & [4] & 3 & [2] & 5\\
+  1 & [2] & 3 & 4 & 5\\
+ \\
+  1 & 2 & 3 & 4 & 5\\
+  \end{array}\\
+  
+Berechnung der Vergleiche:\\
+(n-1)= 5 -1 = 4 Vergleiche  \\
+\\
+Berechnung der Vertauschungen:\\
+(n-1)= 5 -1 = 4 Vertauschungen  \\
+
 
 \section*{Aufgabe 2}
 
@@ -131,19 +248,19 @@ $\Omega = \{1, 2, 3, 4, 5, 6\}$
 \subsection*{a)}
 \begin{itemize}
 \item[(a)] 
-Die Wahrscheinlichkeit f�r das Ereignis $A=\{2\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{1}{6}$
+Die Wahrscheinlichkeit für das Ereignis $A=\{2\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{1}{6}$
 \item[(b)]
-Die Wahrscheinlichkeit f�r das Ereignis $A=\{2, 4, 6\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}$
+Die Wahrscheinlichkeit für das Ereignis $A=\{2, 4, 6\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}$
 \end{itemize}
 \subsection*{b)}
 Zu zeige: Falls $A \cap B = \emptyset$, dann gilt $P(A \cap B)=P(A)+P(B)$\\
 (1)
 \begin{align*}
 P(A \cup B) &\overset{(*)}{=} P((A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A))\\
-&= P(A \setminus B) + P(A \cap B) + P(B \setminus A) \ \ \leftarrow \sigma \textrm{-additivit�t}\\
+&= P(A \setminus B) + P(A \cap B) + P(B \setminus A) \ \ \leftarrow \sigma \textrm{-additivität}\\
 &= \underbrace{P(A \setminus B) + P(A \cap B)}_{= P(A)} + \underbrace{P(B \setminus A) + P(A \cap B)}_{=P(B)} - P(A \cap B)\\
 &= P(A) + P(B) + P(A \cap B)\\
-&\textrm{f�r $A \cap B = \emptyset$ gilt somit}\\
+&\textrm{für $A \cap B = \emptyset$ gilt somit}\\
 &= P(A) + P(B) \hspace{7cm} \Box
 \end{align*}
 (*):\\
@@ -171,12 +288,12 @@ $A \cup B = (A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A)$\\
       (-2,-2) rectangle (3,2) node [text=black,above] {$\Omega$};
 \end{tikzpicture}\\
 \\
-F�r $A \cap B \neq \emptyset$ gilt $P(A \cup B) \le P(A)+P(B)$ denn:\\
+Für $A \cap B \neq \emptyset$ gilt $P(A \cup B) \le P(A)+P(B)$ denn:\\
 $P(A \cup B)=P(A) +P(B) - P(A \cap B) \leftarrow$ siehe Beweis (1)\\
 $\Rightarrow P(A \cup B) \le P(A)+P(B)$
 \subsection*{c)}
 $\Omega = \{1, 2, 3, 4, 5, 6\}^3$\\
-Das Ereignis, dass "Alle drei W�rfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit f�r dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
+Das Ereignis, dass "Alle drei Würfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit für dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
 \subsection*{d)}
 $\Omega = \{1, 2, 3, 4,5 ,6\}^2$
 \begin{itemize}
@@ -185,7 +302,7 @@ $\Omega = \{1, 2, 3, 4,5 ,6\}^2$
 [X=4]&=\{(x,y) \in \Omega \ | \ X(x,y)=4\}\\
 &=\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}
 \end{align*}
-Es werden zwei W�rfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der W�rfel eine 4 zeigt und die Augenzahl des anderen W�rfels $\ge 4$ ist. Das hei�t das Minimum der gew�rfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
+Es werden zwei Würfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der Würfel eine 4 zeigt und die Augenzahl des anderen Würfels $\ge 4$ ist. Das heißt das Minimum der gewürfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
 \item[(b)]
 $P([X=4])=P(\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
 Unter Annahme der Gleichverteilung der Ereignisse ist $P([X=4])=\frac{1}{6}$.
