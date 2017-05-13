@@ -1,7 +1,10 @@
-\documentclass[a4paper]{scrartcl}
+\documentclass[enabledeprecatedfontcommands, a4paper]{scrartcl}
 
 
 \usepackage[ansinew]{inputenc}
+
+
+
 \usepackage[ngerman]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -25,36 +28,13 @@
 \usepackage{fancybox}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
-\usepackage{listings} 
-\usepackage{color}   
-\usepackage[svgnames]{xcolor} 
-\lstset{
-	language=Java, 
-   basicstyle={\small, \ttfamily},
-   keywordstyle=\color{blue!80!black!100}, 
-   identifierstyle=, 
-   commentstyle=\color{green!50!black!100}, 
-   stringstyle=\ttfamily, 
-   breaklines=true, 
-   numbers=none, 
-   numberstyle=\small, 
-   frame=tb, 
-   backgroundcolor=\color{blue!3} ,
-   aboveskip=3mm,
-   belowskip=3mm,
-   showstringspaces=false,
-   columns=flexible,
-   breaklines=trues,
-   breakatwhitespace=true,
-   tabsize=3,
-} 
 
 \input kvmacros
 
-%GrÃ¶ÃŸe der RÃ¤nder setzen
+%GrÃ¶Ãe der RÃ¤nder setzen
 \geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
 
-%Kopf- und FuÃŸzeile
+%Kopf- und FuÃzeile
 \pagestyle {fancy}
 \fancyhead[L]{Tutor: Benjamin Coban}
 \fancyhead[C]{Theoretische Informatik}
@@ -65,7 +45,7 @@
 \fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
 
 
-%Formatierung der Ãœberschrift, hier nichts Ã¤ndern
+%Formatierung der Ãberschrift, hier nichts Ã¤ndern
 \def\header#1#2{
 \begin{center}
 {\Large\bf Übungsblatt #1} %Blatt eintragen
@@ -138,111 +118,557 @@ Merle Kammer
 \section*{Aufgabe 1}
 \subsection*{a)}
 Bubblesort:\\
-Beim Durchlaufen des Feldes werden die jeweiligen Nachbarelemente miteinander verglichen und ggf. ausgetauscht. Am Ende des ersten Laufs befindet sich das größte Element am Feldende. Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das letzte Element. Danach hat man das zweitgrößte Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Feld sortiert ist.\\
+Beim Durchlaufen des Arrays werden die jeweiligen Nachbarelemente miteinander verglichen  und ausgetauscht. \\
+Am Ende des ersten Durchlaufs befindet sich das größte Element am Ende des Arrays. Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das letzte Element. Danach hat man das zweitgrößte Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Array sortiert ist.\\
 \newline
-\begin{lstlisting} 
-{wiederhole für alle von 0 bis max:
-		setzte min := n
-				{wiederhole alle s von n+1 bis max
-			 ist a_{s} < a_{min}?
-		nein: geh zurück!
-	ja setzte min := s
-vertausche a_{min} mit a_{n}}}
-\end{lstlisting}   
+\textbf{Pseudocode}\\
+\\
+\includegraphics[width=0.50\textwidth]{Bild}\\
 
-Beschreibung Minimumsort\\
-Laufe ab Index 1 über die gesamte Folge und merke Dir den kleinsten Wert. Vertausche diesen Wert mit dem, der in der Folge an Stelle 2 steht. Somit erhältst Du eine Folge, die bis Index 1 sortiert ist. Dann laufe ab Index 2 über diese Folge und merke Dir wieder den kleinsten Wert. Diesen vertauschst Du jetzt mit dem an Index 2 stehenden Wert. Die so entstandene neue Folge ist nun bereits bis Index 2 sortiert. Wiederhole diesen Vorgang bis Index (n-1). Nach diesen (n-1) Durchläufen erhältst Du eine vollständig sortierte Folge, und der Algorithmus ist beendet.
-\newline
- \begin{lstlisting} 
-{double[] a ;
-			i := 1;
-				solange(i < n )
-							min := i;
-								j := i +1;
-									solange ( j <= n )
-						wenn ( Wert in  $a_{j} $ < Wert in $ a_{min} $) 
-				min := j;
-			j := j+1;
-		vertausche die Werte a_{min} und a_{i}
-i= i+1;
+\noindent Beschreibung Minimumsort:\\
+Beim Durchlaufen des Arrays wird das kleinste Element auf min gesetzt und mit dem ersten Element getauscht.
+Am Ende des ersten Durchlaufs befindet sich das kleinste Element am Anfang des Ararys Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das erste  Element. Danach hat man das zweitkleinste Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Array sortiert ist.
 
-\end{lstlisting} 
+\textbf{Pseudocode}\\
+\\
+\includegraphics[width=0.50\textwidth]{Bild1}\\
 \newpage
 \subsection*{b)}
 Bubblesort vorsortierte Liste:\\
-Bei einer bereits sortierten Liste wird Bubblesort die Liste nur einmal über das Array gehen müssen, um festzustellen, dass die Liste bereits sortiert ist, weil keine benachbarten Elemente vertauscht werden mussten. Daher benötigt Bubblesort   \Omega(n)  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
-Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.
-
-Minimum Sort vorsortiere Liste:\\
-Bei einer vorsortieren Liste muss MinSort mindestens einmal alle Zahlen vergleichen.  .Daher benötigt auch MinSort   \Omega{O}(n)  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Bei einer bereits sortierten Liste wird Bubblesort die Liste nur einmal durchgehen, um festzustellen, dass die Liste bereits sortiert ist, weil keine benachbarten Elemente vertauscht werden mussten. Daher benötigt Bubblesort   ${O}(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
 Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.\\
-\subsection*{c + d)}}
-
-Bubblesort:\\
-Bei absteigender Sortiertung einer Liste wird in jedem Durchlauf der inneren Schleife das erste Element bis zum n - 1 Element durchgetauscht (also n -1 viele  Vertausch-Operationen) und der Wert von n um 1 reduziert. Da dies die maximale Anzahl an Vertausch-Operationen pro Iteration und die maximale Anzahl an Iterationen liefert, ist dies der Worst-Case mit der Laufzeit \Theta(n^{2}).\\
 \newline
+Minimum Sort vorsortiere Liste:\\
+Bei einer vorsortieren Liste muss MinSort mindestens einmal alle Zahlen vergleichen.Daher benötigt auch MinSort   ${O}(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.\\
+\newpage
+\subsection*{c + d)}
+Bubblesort:\\
+Bei absteigend sortierten Liste wird in jedem Durchlauf der inneren Schleife das erste Element bis zum n - 1 Element durchgetauscht (also n -1 viele  Vertausch-Operationen) und der Wert von n um 1 reduziert. Da dies die maximale Anzahl an Vertausch-Operationen und Vergleichs-Operationen pro Iteration und die maximale Anzahl an Iterationen liefert, ist dies der Worst-Case mit der Laufzeit $\Theta(n^{2})$.\\
+
 Insgesamt führt Bubble Sort also höchstens:\\
 
-\sum_{i=1}^{n-1} (n-i) = \sum_{j=1}^{n-1} j = \dfrac{n \cdot (n-1)}{2}
+$\sum_{i=1}^{n-1} (n-i) = \sum_{j=1}^{n-1} j = \dfrac{n \cdot (n-1)}{2}$\\
 
 Vergleiche und Vertauschungen durch.\\
 
 Beispiel Liste absteigend sortiert:\\
 \begin{array}[t]{lllrr}
-  [5 & 4] & 3 & 2 & 1\\
+  5 & 4 & 3 & 2 & 1\\
   \\
-  4 & [5 & 3] & 2 & 1\\
-  4 & 3 & [5 & 2] & 1\\
-  4 & 3 & 2 & [5 & 1]\\
-  [4 & 3] & 2 & 1 & 5\\
-  3 & [4 & 2] & 1 & 5\\
-  3 & 2 & [4 & 1] & 5\\
-  3 & 2 & 1 & [4 & 5]\\
-  2 & [3 & 1] & 4 & 5\\
-  2 & 1 & [3 & 4] & 5\\
-  [2 & 1] & 3 & 4 & 5\\
+  4 & 5 & 3 & 2 & 1\\
+  4 & 3 & 5 & 2 & 1\\
+  4 & 3 & 2 & 5 & 1\\
+  4 & 3 & 2 & 1 & 5\\
+  3 & 4 & 2 & 1 & 5\\
+  3 & 2 & 4 & 1 & 5\\
+  3 & 2 & 1 & 4 & 5\\
+  2 & 3 & 1 & 4 & 5\\
+  2 & 1 & 3 & 4 & 5\\
+  2 & 1 & 3 & 4 & 5\\
  \\
  1 & 2 & 3 & 4 & 5\\
   \end{array}\\
   
-Berechnung der Vergleiche:\\
-\dfrac{5 \cdot (5-1)}{2} = $10 Vergleiche$  \\
+\noindent Berechnung der max Vergleiche:\\
+\hspace*{10mm} $\dfrac{5 \cdot (5-1)}{2} = $10 Vergleiche  \\
 \\
-$Berechnung der Vertauschungen:$:\\
-\dfrac{5 \cdot (5-1)}{2} = $10 Vertauschungen$  \\
-\newpage
-Minimum Sort:\\
-Beim Minimum Sort spielt der Inhalt des Eingabe-Arrays keine Rolle für die Anzahl an Swap-Operationen, da diese auf jeden Fall genau einmal in jeder Iteration der äußeren Schleife ausgeführt werden und die Anzahl der Iterationen nur von der Länge des Eingabe- Arrays abhängt.\\
-In der i-ten Phase benötigt MinSort n- i Vergleiche, aber nur eine Vertauschung. \\
+Berechnung der max Vertauschungen:\\
+\hspace*{10mm} $\dfrac{5 \cdot (5-1)}{2} =$ 10 Vertauschungen  \\
+
+\noindent Minimum Sort:\\
+Beim Minimum Sort spielt der Inhalt des Eingabe-Arrays keine Rolle für die Anzahl an Vertausch-Operationen, da diese auf jeden Fall genau einmal in jeder Iteration der äußeren Schleife ausgefuührt werden und die Anzahl der Iterationen nur von der Länge des Eingabe- Arrays abhängt.\\
+
 Insgesamt führt MinSort also höchstens:\\
 
-(n - 1) Vergleiche und Vertauschungen benötigt.\\
+$(n-1)$\\
+
+Vergleiche und Vertauschungen durch.\\
 
 Beispiel Liste absteigend sortiert:\\
 \begin{array}[t]{lllrr}
-  5 & 4 & 3 & 2 & [1]\\
+  5 & 4 & 3 & 2 & 1\\
   \\
-  [1] & [4] & 3 & [2] & 5\\
-  1 & [2] & 3 & 4 & 5\\
+  1 & 4 & 3 & 2 & 5\\
+  1 & 2 & 3 & 4 & 5\\
  \\
   1 & 2 & 3 & 4 & 5\\
   \end{array}\\
   
-Berechnung der Vergleiche:\\
-(n-1)= 5 -1 = 4 Vergleiche  \\
+Berechnung der max Vergleiche:\\
+$(n-1)= 5 -1 =$ 4 Vergleiche  \\
 \\
-Berechnung der Vertauschungen:\\
-(n-1)= 5 -1 = 4 Vertauschungen  \\
+Berechnung der max Vertauschungen:\\
+$(n-1)= 5 -1 =$ 4 Vertauschungen  \\
 
-
+\newpage
 \section*{Aufgabe 2}
+Die Laufzeit von Quicksort ist im allgemeinen gegegen durch:\\
+\begin{align*} {T}(n) = {T}(k) + {T}(n-k) + {O}(n)
+\end{align*}\\
+wobei k das Pivotelemet ist (bzw. die Einteilung der Gruppen).\\
+\newline
+\noindent Damit die Eingabe stehts so geteilt wird, dass die Anzahl der kleinen Elemente doppelt so groß ist wie die der größten Elemente muss $k = \dfrac{2n}{3}$ sein!\\
+Es folgt:\\
+\begin{align*} {T}(n) = {T}(\dfrac{2n}{3}) + {T}(n - \dfrac{2n}{3}) + {O}(n)
+                                = {T}(\dfrac{2n}{3}) + {T}(\dfrac{n}{3}) + {O}(n)
+\end{align*}\\
+Behauptung: ${T}(n) \le c\cdot n \cdot log \cdot n  $ für konstante c\\
+Beweis:\\
+${T}(n) = c \cdot \dfrac{2n}{3} \cdot log  (\dfrac{2n}{3}) + c \cdot \dfrac{n}{3} \cdot log  (\dfrac{n}{3}) + O}(n)
+$\\
+\\
+\hspace*{8mm} $= c \cdot \dfrac{2n}{3} \cdot (log (n) - log  (\dfrac{3}{2}) + c \cdot \dfrac{n}{3} \cdot (log (n) -  log  (3)) + O}(n)
+$\\
+\\
+\hspace*{8mm} $= c \cdot \dfrac{2n}{3} \cdot log (n) - c \cdot \dfrac{2n}{3} \cdot log (\dfrac{3}{2}) + c \cdot \dfrac{n}{3} \cdot log (n) - c \cdot \dfrac{n}{3} log  (3) + O}(n)
+$\\
+\\
+\hspace*{8mm} $= c \cdot n \cdot log (n) - c \cdot \dfrac{n}{3} \cdot (2log(\dfrac{3}{2} + log (3)) +  O}(n)
+$\\
+\\
+\hspace*{8mm} $= c \cdot n \cdot log (n) - c \cdot n \cdot \dfrac{1}{3} \cdot log(\dfrac{27}{4}) +  O}(n)
+$\\
+\\
+\hspace*{8mm} $\le c \cdot n \cdot log (n)$ für $ c \cdot \dfrac{3}{log(\dfrac{27}{4})}
+\approx 1.08897$\\
+\\
+\noindent Da in der Aufgabe steht, dass $c \in N$ müssen wir $c \cdot \dfrac{3}{log(\dfrac{27}{4})}$ runden\\ 
+\noindent(aufrunden, da $\ge$ und c Mindeswert ist wir daher nicht abrunden können) \\
+\rightarrow c $ \ge $ 2 muss mindestens erfüllt sein!!
+\newpage
 
 \section*{Aufgabe 3}
 \subsection*{a)}
-\subsection*{b)}
+$A = \{9, 7, 21, 14, 88, 23, 10, 26, 13\}$
+\\
+\\
+\textbf{Bilden des Heaps:}
+\\
+\\
+\begin{figure}[h!]
+Einfügen von 9
+\\
+\\
+\ovalbox{
+
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+;
+\end{tikzpicture}}
+
+\end{figure}
+
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 7
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+child {node [circle,draw] (a) {$7$}}
+;
+\end{tikzpicture}}
+\end{figure}
+
+\begin{figure}[h!]
+Wiederherstellen des Heap mit Beachtung des Kriteriums
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+child {node [circle,draw] (a) {$9$}}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{2cm}
+
+\begin{figure}[h!]
+
+Einfügen von 21
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+child {node [circle,draw] (a) {$9$}}
+child {node [circle,draw] (b) {$21$}}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 14
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}}
+}
+child {node [circle,draw] (b) {$21$}}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 88
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$21$}}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 23
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$21$}
+		child {node [circle,draw] (c) {$23$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 10
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$21$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$10$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Wiederherstellen des Heap mit Beachtung des Kriteriums
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 26
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}
+		child {node [circle,draw] (d) {$26$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Einfügen von 13
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$14$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$13$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+Wiederherstellen des Heap mit Beachtung des Kriteriums
+\\
+\\
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$14$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+\\
+¥\subsection*{b)}
+EXTRACTMIN Operation ausführen und Heap-Eigenschaft wiederherstellen:
+\\
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$7$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$14$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\\
+\\
+\\
+\\
+Entnehme das Minimum d.h. die Wurzel des Baumes und füge 14 als neue Wurzel hinzu:
+\\
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$14$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\\
+\\
+Vergleiche 14 mit beiden Kindelementen und tausche mit kleinerem, also der 9:
+\\
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+	child {node [circle,draw] (a) {$14$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\\
+\\
+Vergleiche 14 wieder mit beiden Kindelementen, falls kleiner, tausche mit dem kleinsten, in dem Fall der 13:
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+	child {node [circle,draw] (a) {$13$}
+		child {node [circle,draw] (c) {$14$}
+		child {node [circle,draw] (d) {$26$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\\
+Dies ist der finale Heap, da die Heap-Eigenschaft nun komplett wiederhergestellt ist.
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
+\\
 \subsection*{c)}
+Neues Element 6 zu Heap hinzufügen:
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+	child {node [circle,draw] (a) {$13$}
+		child {node [circle,draw] (c) {$14$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$6$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+\\
+\\
+Heap-Eigenschaft nach und nach wiederherstellen:
+
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+	child {node [circle,draw] (a) {$13$}
+		child {node [circle,draw] (c) {$6$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$14$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$9$}
+	child {node [circle,draw] (a) {$6$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$14$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+
+\begin{figure}[h!]
+\ovalbox{
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
+\node [circle,draw] (9){$6$}
+	child {node [circle,draw] (a) {$9$}
+		child {node [circle,draw] (c) {$13$}
+		child {node [circle,draw] (d) {$26$}}
+		child {node [circle,draw] (d) {$14$}}
+		}
+		child {node [circle,draw] (d) {$88$}}
+}
+child {node [circle,draw] (b) {$10$}
+		child {node [circle,draw] (c) {$23$}}
+		child {node [circle,draw] (c) {$21$}}
+		}
+;
+\end{tikzpicture}}
+\end{figure}
+\vspace{1cm}
+\pagebreak
 \subsection*{d)}
 
+Schritte in O-Notation um maximales Element aus dem Heap zu löschen?
+\\
+$\rightarrow$ man vergleicht alle Blätter, aber nicht die Elternknoten, da diese nach der Heap-Eigenschaft nicht das größte Element sein können
+\\
+\\
+Schritt 1: Das Maximum finden $\rightarrow$  $[\frac{n}{2}]$ mit n Anzahl der Elemente d.h. O($[\frac{n}{2}]$)
+\\
+\\
+Schritt 2: Maximum an unterstes Blatt,, welches am weitesten rechts steht $\rightarrow$ O(1)
+\\
+\\
+Schritt 3: Heap-Eigenschaft wiederherstellen: max O($\log n$), da Höhe von Baum ausgewogen
+\\
+\\
+Schritt 4: Maximum aus Baum entfernen (Heap-Eigenschaft bleibt durch Schritt 1 immer erhalten) 
+\\
+\\
+$\rightarrow$ $[\frac{n}{2}] + 1 + \log n + 1 = [\frac{n}{2}] +\log n + 2$ $\rightarrow$ O(n)
+\newpage
 \section*{Aufgabe 4}
 $\Omega = \{1, 2, 3, 4, 5, 6\}$
 \subsection*{a)}
@@ -294,17 +720,18 @@ $\Rightarrow P(A \cup B) \le P(A)+P(B)$
 \subsection*{c)}
 $\Omega = \{1, 2, 3, 4, 5, 6\}^3$\\
 Das Ereignis, dass "Alle drei Würfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit für dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
+\newpage
 \subsection*{d)}
 $\Omega = \{1, 2, 3, 4,5 ,6\}^2$
 \begin{itemize}
 \item[(a)]
 \begin{align*}
 [X=4]&=\{(x,y) \in \Omega \ | \ X(x,y)=4\}\\
-&=\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}
+&=\{(4,4),(4,5),(5,4),(4,6),(6,4)\}
 \end{align*}
 Es werden zwei Würfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der Würfel eine 4 zeigt und die Augenzahl des anderen Würfels $\ge 4$ ist. Das heißt das Minimum der gewürfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
 \item[(b)]
-$P([X=4])=P(\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
+$P([X=4])=P(\{(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
 Unter Annahme der Gleichverteilung der Ereignisse ist $P([X=4])=\frac{1}{6}$.
 \end{itemize}
 
