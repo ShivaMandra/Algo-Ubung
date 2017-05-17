@@ -1,0 +1,164 @@
+\documentclass[enabledeprecatedfontcommands, a4paper]{scrartcl}
+
+
+\usepackage[ansinew]{inputenc}
+
+
+\usepackage{fixltx2e}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{listings} 
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usetikzlibrary{trees}
+\usepackage{subfigure}
+\usepackage{float}
+ \usepackage{polynom}
+  \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage[]{algorithm2e}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\input kvmacros
+
+%Gr√∂√üe der R√§nder setzen
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Kopf- und Fu√üzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: Benjamin Coban}
+\fancyhead[C]{Theoretische Informatik}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
+
+
+%Formatierung der √úberschrift, hier nichts √§ndern
+\def\header#1#2{
+\begin{center}
+{\Large\bf ‹bungsblatt #1} %Blatt eintragen
+
+{(Abgabetermin #2)}
+\end{center}
+}
+
+%Definition der Punktetabelle, hier nichts √§ndern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr & 
+      } 
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+    \end{tabularx}
+  \end{center}
+}
+
+
+
+\begin{document}
+
+%Hier bitte Student 1 usw ersetzen
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+\begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Hier Namen eintragen
+%
+Stefan Fischer\\ 
+Benjamin Neidhardt\\ 
+Merle Kammer
+\end{minipage} & \begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Die zweite Zahl durch die Anzahl der Aufgaben ersetzen
+%
+%
+\punkteliste{1}{4} %
+%
+\end{minipage}\\
+\end{tabularx}
+
+
+
+% ----------------------- TODO ---------------------------
+%
+%Hier Nummer und Datum aktualisieren
+\header{Nr. 4}{18.05.2017}
+
+
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+
+\subsection*{b)}
+
+
+\subsection*{c + d)}
+
+
+\section*{Aufgabe 2}
+
+\section*{Aufgabe 3}
+\subsection*{a)}
+Das Pivotelement ist immer der Median und teilt somit immer genau bei der H‰lfte. (Siehe Vorlesung 4 Quicksort: Mittlere Analyse) 
+\subsection*{b)}
+Gesucht ist ein Linearzeitalgorithmus: i H‰user mit $1 \leq i \leq n$, H‰user haben $p_i \in N$ Personen
+\\
+1. erstes und n-tes Haus als initiale Indizes b, e w‰hlen
+\\
+2. Anzahl Personen be in Haus bestimmen $\rightarrow$ Abstand $d_b+1-d_b$ bestimmen $\rightarrow$ Anzahl Personen mal den Abstand $\rightarrow$ ergibt $b_s$
+\\
+Anzahl Personen be $\rightarrow$ Abstand $d_e-d_e-1$ $\rightarrow$ Anzahl Personen mal Abstand $\rightarrow$ ergibt $e_s$
+\\
+3. Wenn $b_s \leq e_s$, dann $p_b+1 = p_b + p_b+1$ sonst $p_e-1 = p_e + p_e-1$
+\\
+4. Dann Indexverschiebung: war $b_s<e_s$, dann $b:=b+1, e:=e$ sonst $e:=e-1, b:=b$
+\\
+5. Sobald b=e terminiert der Algorithmus
+\subsection*{c)}
+1. Multipliziere niedrigere Personenzahl mit Distanz von A, B. Speicher diesen Wert als Minimum.
+\\
+2. Falls Summe kleiner als aktuelles Minimum, mache es zu neuem Minimum.
+\\
+3. Nach Vergleich aller St‰dte, gib das Minimum zur¸ck
+
+
+
+\section*{Aufgabe 4}
+\subsection*{a)}
+Wahrscheinlichkeit um k mal (hintereinander) Kopf zu werfen ist $p^i$ (analog bei Zahl). Die Wahrscheinlichkeit in festgelegter Reihenfolge beim Werfen k mal Kopf und n-k mal Zahl zu werfen ist also $p^k*(1-p)^n-k$. Die Anzahl an Mˆglichkeiten, auf die sich die k Erfolge auf n W¸rfe verteilen kˆnnen ist: $\binom {n} {k}$. Damit macht die Formel Sinn.
+
+\subsection*{b)}
+
+\subsection*{c)}
+
+
+\end{document}
