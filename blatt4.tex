@@ -28,6 +28,29 @@
 \usepackage{fancybox}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
+\usepackage{listings} 
+ \usepackage{color}   
+ \usepackage[svgnames]{xcolor} 
+x\lstset{
+ 	language=Java, 
+    basicstyle={\small, \ttfamily},
+    keywordstyle=\color{blue!80!black!100}, 
+    identifierstyle=, 
+    commentstyle=\color{green!50!black!100}, 
+    stringstyle=\ttfamily, 
+    breaklines=true, 
+    numbers=none, 
+    numberstyle=\small, 
+    frame=tb, 
+    backgroundcolor=\color{blue!3} ,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    breaklines=trues,
+    breakatwhitespace=true,
+    tabsize=3
+ } 
 
 \input kvmacros
 
@@ -117,11 +140,52 @@ Merle Kammer
 
 \section*{Aufgabe 1}
 \subsection*{a)}
+ \begin{lstlisting} 
+smallest Difference (Array a){
+	mergeSort (a);
+		int minDiff = a[1] - a[0];
+			int res = 0;
+					for (int i = 1; i< a.lenght -1; i = i +1){
+				int curDiff = a[i+1] - a[i];
+			if (curDiff < minDiff)){
+		minDiff = curDiff;
+	res = i;}
+	}
+return res;}
 
+ \end{lstlisting}\\
+ 
+
+\noindent MergeSort hat bekannterweise eine Laufzeit von $O(nlogn)$ wenn wir jeweils zwei Teilfolgen mischen.
+Nachdem wir sortiert haben wird jedem Schritt die Differenz zweier Nachbarn bestimmt und mit der aktuellen minimalen Differenz verglichen. Diese Vergleiche benötigen $O(n)$ bis das komplette Array durch ist und somit die minimale Differenz eindeutig bestimmt wurde. \\
+Das Indexpaar ist dann a[res], a[res + 1].\\
+Die Gesamtlaufzeit ist somit:\\
+$$O(nlogn) + O(n) \in O(nlogn)$$
+\newpage
+ 
 \subsection*{b)}
+ \begin{lstlisting} 
+maxFreq (Array a){
+	mergeSort (a); // -> O(nlogn)
+		int max = 0;
+			int counter = 0;
+				int res;
+					for (int i = 0; i< a.lenght -1; i = i +1){
+							if (a[i] == a[i+1] ){
+						counter = counter + 1;}
+					else {
+				if (counter > max){
+			max = counter; 
+		res = a[i];}
+		}
+	}
+return res;}
 
+ \end{lstlisting}\\
 
-\subsection*{c + d)}
+Laufzeit MergSort = $O(nlogn)$\\
+
+\subsection*{c)}
 
 
 \section*{Aufgabe 2}
@@ -158,7 +222,43 @@ Wahrscheinlichkeit um k mal (hintereinander) Kopf zu werfen ist $p^i$ (analog be
 
 \subsection*{b)}
 
+
+$E (x) = \sum_{x \in M} x \cdot P([X - x)$\\
+\newline
+ $		  = \sum_{x \in M} x \cdot \binom{n}{x} p^{x} (1-p)^{n-x}$ \\
+\newline
+$ 		  = \sum_{x = 0}^n x \cdot \binom{n}{x} p^{x} (1-p)^{n-x} \rightarrow x = 0 fällt aus$\\ 
+\newline
+$ 		  = \sum_{x = 1}^n x  \cdot \dfrac{n!}{x! (n-x)} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot \sum_{x = 1}^n   \dfrac{n!}{x! (n-x)} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot \sum_{x = 1}^n  \dfrac{(n - 1)!}{(x-1)! \cdot (n-x)!} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot p \cdot \sum_{x = 1}^n  \cdot \binom{n-1}{x-1} \cdot p^{x-1} (1-p)^{(n-1) - (x-1)} \rightarrow x' := x-1$\\
+\newline
+$ 		  = n \cdot p \cdot \sum_{x^{'} = 0}^{n-1}  \cdot \binom{n-1}{x'} \cdot p^{x'} (1-p)^{(n-1) - x'}$\\
+\newline
+$ 		  = n \cdot p \cdot (p + (1-p))^{n-1} $ \rightarrow [Binomischer Lehrsatz]\\
+\newline
+$ 		  = n \cdot p \cdot 1^{n-1} \cdot n \cdot p$ 
 \subsection*{c)}
+$Var (X) = E(X^{2}) - E(X)^{2}$
+\newline
+$ = E(X^{2}) - 2E(X)^{2}  + E(X)^{2}$
+\newline
+$ = E(X^{2}) - 2E(X) \cdot E(X) + E(X)^{2}$
+\newline
+$ = E(X^{2}) - E(2X) \cdot E(X) + E(X)^{2}$
+\newline
+$ = E(X^{2}) - E(2XE(X)) + E(X)^{2}$
+\newline
+$ = E(X^{2} - 2XE(X)) + E(X)^{2}$
+\newline
+$ = E(X^{2} - 2XE(X) + E(X)^{2})$
+\newline
+$ = E((X -  E(X))^{2})$
+\newline
 
 
 \end{document}
