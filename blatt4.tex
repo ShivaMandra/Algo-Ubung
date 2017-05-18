@@ -30,8 +30,9 @@
 \usetikzlibrary{shapes}
 \usepackage{listings} 
  \usepackage{color}   
- \usepackage[svgnames]{xcolor} 
-x\lstset{
+ \PassOptionsToPackage{svgnames}{xcolor}
+ \usepackage[svgnames]{xcolor}% 
+\lstset{
  	language=Java, 
     basicstyle={\small, \ttfamily},
     keywordstyle=\color{blue!80!black!100}, 
@@ -153,7 +154,7 @@ smallest Difference (Array a){
 	}
 return res;}
 
- \end{lstlisting}\\
+ \end{lstlisting}
  
 
 \noindent MergeSort hat bekannterweise eine Laufzeit von $O(nlogn)$ wenn wir jeweils zwei Teilfolgen mischen.
@@ -181,14 +182,39 @@ maxFreq (Array a){
 	}
 return res;}
 
- \end{lstlisting}\\
-
+ \end{lstlisting}
 Laufzeit MergSort = $O(nlogn)$\\
 
 \subsection*{c)}
 
 
 \section*{Aufgabe 2}
+
+ \begin{lstlisting} 
+S [] (S ist eine Teilmenge von M als Array dargestellt)
+for i=0 ... (n-1) (S darf nicht M sein)
+	S[i] <- M[i] ( wir fuellen Array S mit den ersten i-Elementen von n)
+	sSumme <- 0
+	j <- 0
+	for j=0 ... i
+		sSumme <- sSumme + S[i] (summieren Elemente von S)
+	rof
+	mSumme <- 0
+	for j+1 ... n
+		mSumme <- mSumme + M[j+1]
+	rof
+	if not 0 \leq (sSumme / mSumme) < 1
+		return "Problem nicht gelöst"
+	fi
+rof
+ \end{lstlisting}
+ 
+Die äußere Schleife des Algorithmus füllt S mit Elementen von M. In den inneren beiden Schleifen 
+werden jeweils die Summen der zwei neu gewonnenen Teilmengen S und M gebildet. Falls der Quotient 
+rationale Zahl q nicht im Bereich $0 \leq q \leq 1$ liegt, wird eine Fehlermeldung ausgegeben. 
+Ansonsten läuft der Algorithmus weiter, bis M nur noch aus einem Element besteht. M darf nicht leer 
+sein, ansonsten ist die Behauptung nicht definiert. Durch die Vorraussetzung, dass die Summe über 
+alle i-1 kleineren Elemente von M kleiner als das i-te Element ist, kann q den Wert 1 nicht annehmen.
 
 \section*{Aufgabe 3}
 \subsection*{a)}
@@ -227,7 +253,7 @@ $E (x) = \sum_{x \in M} x \cdot P([X - x)$\\
 \newline
  $		  = \sum_{x \in M} x \cdot \binom{n}{x} p^{x} (1-p)^{n-x}$ \\
 \newline
-$ 		  = \sum_{x = 0}^n x \cdot \binom{n}{x} p^{x} (1-p)^{n-x} \rightarrow x = 0 fällt aus$\\ 
+$ 		  = \sum_{x = 0}^n x \cdot \binom{n}{x} p^{x} (1-p)^{n-x} \rightarrow x = 0$ fällt aus\\ 
 \newline
 $ 		  = \sum_{x = 1}^n x  \cdot \dfrac{n!}{x! (n-x)} p^{x} (1-p)^{n-x}$\\
 \newline
@@ -239,7 +265,7 @@ $ 		  = n \cdot p \cdot \sum_{x = 1}^n  \cdot \binom{n-1}{x-1} \cdot p^{x-1} (1-
 \newline
 $ 		  = n \cdot p \cdot \sum_{x^{'} = 0}^{n-1}  \cdot \binom{n-1}{x'} \cdot p^{x'} (1-p)^{(n-1) - x'}$\\
 \newline
-$ 		  = n \cdot p \cdot (p + (1-p))^{n-1} $ \rightarrow [Binomischer Lehrsatz]\\
+$ 		  = n \cdot p \cdot (p + (1-p))^{n-1} \rightarrow$ [Binomischer Lehrsatz]\\
 \newline
 $ 		  = n \cdot p \cdot 1^{n-1} \cdot n \cdot p$ 
 \subsection*{c)}
