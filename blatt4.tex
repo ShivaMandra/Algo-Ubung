@@ -1,0 +1,290 @@
+\documentclass[enabledeprecatedfontcommands, a4paper]{scrartcl}
+
+
+\usepackage[ansinew]{inputenc}
+
+
+\usepackage{fixltx2e}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{listings} 
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usetikzlibrary{trees}
+\usepackage{subfigure}
+\usepackage{float}
+ \usepackage{polynom}
+  \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{forloop}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage[]{algorithm2e}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{listings} 
+ \usepackage{color}   
+ \PassOptionsToPackage{svgnames}{xcolor}
+ \usepackage[svgnames]{xcolor}% 
+\lstset{
+ 	language=Java, 
+    basicstyle={\small, \ttfamily},
+    keywordstyle=\color{blue!80!black!100}, 
+    identifierstyle=, 
+    commentstyle=\color{green!50!black!100}, 
+    stringstyle=\ttfamily, 
+    breaklines=true, 
+    numbers=none, 
+    numberstyle=\small, 
+    frame=tb, 
+    backgroundcolor=\color{blue!3} ,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    breaklines=trues,
+    breakatwhitespace=true,
+    tabsize=3
+ } 
+
+\input kvmacros
+
+%Gr√∂√üe der R√§nder setzen
+\geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+%Kopf- und Fu√üzeile
+\pagestyle {fancy}
+\fancyhead[L]{Tutor: Benjamin Coban}
+\fancyhead[C]{Theoretische Informatik}
+\fancyhead[R]{\today}
+
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
+
+
+%Formatierung der √úberschrift, hier nichts √§ndern
+\def\header#1#2{
+\begin{center}
+{\Large\bf ‹bungsblatt #1} %Blatt eintragen
+
+{(Abgabetermin #2)}
+\end{center}
+}
+
+%Definition der Punktetabelle, hier nichts √§ndern
+\newcounter{punktelistectr}
+\newcounter{punkte}
+\newcommand{\punkteliste}[2]{%
+  \setcounter{punkte}{#2}%
+  \addtocounter{punkte}{-#1}%
+  \stepcounter{punkte}%<-- also punkte = m-n+1 = Anzahl Spalten[1]
+  \begin{center}%
+  \begin{tabularx}{\linewidth}[]{@{}*{\thepunkte}{>{\centering\arraybackslash} X|}@{}>{\centering\arraybackslash}X}
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        \thepunktelistectr & 
+      } 
+      #2 &  $\Sigma$ \\
+      \hline
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+      \forloop{punktelistectr}{#1}{\value{punktelistectr} < #2 } %
+      {%
+        &
+      } &\\ 
+    \end{tabularx}
+  \end{center}
+}
+
+
+
+\begin{document}
+
+%Hier bitte Student 1 usw ersetzen
+\begin{tabularx}{\linewidth}{m{0.2 \linewidth}X}
+\begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Hier Namen eintragen
+%
+Stefan Fischer\\ 
+Benjamin Neidhardt\\ 
+Merle Kammer
+\end{minipage} & \begin{minipage}{\linewidth}%
+%
+% ----------------------- TODO ---------------------------
+%Die zweite Zahl durch die Anzahl der Aufgaben ersetzen
+%
+%
+\punkteliste{1}{4} %
+%
+\end{minipage}\\
+\end{tabularx}
+
+
+
+% ----------------------- TODO ---------------------------
+%
+%Hier Nummer und Datum aktualisieren
+\header{Nr. 4}{18.05.2017}
+
+
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+ \begin{lstlisting} 
+smallest Difference (Array a){
+	mergeSort (a);
+		int minDiff = a[1] - a[0];
+			int res = 0;
+					for (int i = 1; i< a.lenght -1; i = i +1){
+				int curDiff = a[i+1] - a[i];
+			if (curDiff < minDiff)){
+		minDiff = curDiff;
+	res = i;}
+	}
+return res;}
+
+ \end{lstlisting}
+ 
+
+\noindent MergeSort hat bekannterweise eine Laufzeit von $O(nlogn)$ wenn wir jeweils zwei Teilfolgen mischen.
+Nachdem wir sortiert haben wird jedem Schritt die Differenz zweier Nachbarn bestimmt und mit der aktuellen minimalen Differenz verglichen. Diese Vergleiche benˆtigen $O(n)$ bis das komplette Array durch ist und somit die minimale Differenz eindeutig bestimmt wurde. \\
+Das Indexpaar ist dann a[res], a[res + 1].\\
+Die Gesamtlaufzeit ist somit:\\
+$$O(nlogn) + O(n) \in O(nlogn)$$
+\newpage
+ 
+\subsection*{b)}
+ \begin{lstlisting} 
+maxFreq (Array a){
+	mergeSort (a); // -> O(nlogn)
+		int max = 0;
+			int counter = 0;
+				int res;
+					for (int i = 0; i< a.lenght -1; i = i +1){
+							if (a[i] == a[i+1] ){
+						counter = counter + 1;}
+					else {
+				if (counter > max){
+			max = counter; 
+		res = a[i];}
+		}
+	}
+return res;}
+
+ \end{lstlisting}
+Laufzeit MergSort = $O(nlogn)$\\
+
+\subsection*{c)}
+
+
+\section*{Aufgabe 2}
+
+ \begin{lstlisting} 
+S [] (S ist eine Teilmenge von M als Array dargestellt)
+for i=0 ... (n-1) (S darf nicht M sein)
+	S[i] <- M[i] ( wir fuellen Array S mit den ersten i-Elementen von n)
+	sSumme <- 0
+	j <- 0
+	for j=0 ... i
+		sSumme <- sSumme + S[i] (summieren Elemente von S)
+	rof
+	mSumme <- 0
+	for j+1 ... n
+		mSumme <- mSumme + M[j+1]
+	rof
+	if not 0 \leq (sSumme / mSumme) < 1
+		return "Problem nicht gelˆst"
+	fi
+rof
+ \end{lstlisting}
+ 
+Die ‰uﬂere Schleife des Algorithmus f¸llt S mit Elementen von M. In den inneren beiden Schleifen 
+werden jeweils die Summen der zwei neu gewonnenen Teilmengen S und M gebildet. Falls der Quotient 
+rationale Zahl q nicht im Bereich $0 \leq q \leq 1$ liegt, wird eine Fehlermeldung ausgegeben. 
+Ansonsten l‰uft der Algorithmus weiter, bis M nur noch aus einem Element besteht. M darf nicht leer 
+sein, ansonsten ist die Behauptung nicht definiert. Durch die Vorraussetzung, dass die Summe ¸ber 
+alle i-1 kleineren Elemente von M kleiner als das i-te Element ist, kann q den Wert 1 nicht annehmen.
+
+\section*{Aufgabe 3}
+\subsection*{a)}
+Das Pivotelement ist immer der Median und teilt somit immer genau bei der H‰lfte. (Siehe Vorlesung 4 Quicksort: Mittlere Analyse) 
+\subsection*{b)}
+Gesucht ist ein Linearzeitalgorithmus: i H‰user mit $1 \leq i \leq n$, H‰user haben $p_i \in N$ Personen
+\\
+1. erstes und n-tes Haus als initiale Indizes b, e w‰hlen
+\\
+2. Anzahl Personen be in Haus bestimmen $\rightarrow$ Abstand $d_b+1-d_b$ bestimmen $\rightarrow$ Anzahl Personen mal den Abstand $\rightarrow$ ergibt $b_s$
+\\
+Anzahl Personen be $\rightarrow$ Abstand $d_e-d_e-1$ $\rightarrow$ Anzahl Personen mal Abstand $\rightarrow$ ergibt $e_s$
+\\
+3. Wenn $b_s \leq e_s$, dann $p_b+1 = p_b + p_b+1$ sonst $p_e-1 = p_e + p_e-1$
+\\
+4. Dann Indexverschiebung: war $b_s<e_s$, dann $b:=b+1, e:=e$ sonst $e:=e-1, b:=b$
+\\
+5. Sobald b=e terminiert der Algorithmus
+\subsection*{c)}
+1. Multipliziere niedrigere Personenzahl mit Distanz von A, B. Speicher diesen Wert als Minimum.
+\\
+2. Falls Summe kleiner als aktuelles Minimum, mache es zu neuem Minimum.
+\\
+3. Nach Vergleich aller St‰dte, gib das Minimum zur¸ck
+
+
+
+\section*{Aufgabe 4}
+\subsection*{a)}
+Wahrscheinlichkeit um k mal (hintereinander) Kopf zu werfen ist $p^i$ (analog bei Zahl). Die Wahrscheinlichkeit in festgelegter Reihenfolge beim Werfen k mal Kopf und n-k mal Zahl zu werfen ist also $p^k*(1-p)^n-k$. Die Anzahl an Mˆglichkeiten, auf die sich die k Erfolge auf n W¸rfe verteilen kˆnnen ist: $\binom {n} {k}$. Damit macht die Formel Sinn.
+
+\subsection*{b)}
+
+
+$E (x) = \sum_{x \in M} x \cdot P([X - x)$\\
+\newline
+ $		  = \sum_{x \in M} x \cdot \binom{n}{x} p^{x} (1-p)^{n-x}$ \\
+\newline
+$ 		  = \sum_{x = 0}^n x \cdot \binom{n}{x} p^{x} (1-p)^{n-x} \rightarrow x = 0$ f‰llt aus\\ 
+\newline
+$ 		  = \sum_{x = 1}^n x  \cdot \dfrac{n!}{x! (n-x)} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot \sum_{x = 1}^n   \dfrac{n!}{x! (n-x)} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot \sum_{x = 1}^n  \dfrac{(n - 1)!}{(x-1)! \cdot (n-x)!} p^{x} (1-p)^{n-x}$\\
+\newline
+$ 		  = n \cdot p \cdot \sum_{x = 1}^n  \cdot \binom{n-1}{x-1} \cdot p^{x-1} (1-p)^{(n-1) - (x-1)} \rightarrow x' := x-1$\\
+\newline
+$ 		  = n \cdot p \cdot \sum_{x^{'} = 0}^{n-1}  \cdot \binom{n-1}{x'} \cdot p^{x'} (1-p)^{(n-1) - x'}$\\
+\newline
+$ 		  = n \cdot p \cdot (p + (1-p))^{n-1} \rightarrow$ [Binomischer Lehrsatz]\\
+\newline
+$ 		  = n \cdot p \cdot 1^{n-1} \cdot n \cdot p$ 
+\subsection*{c)}
+$Var (X) = E(X^{2}) - E(X)^{2}$
+\newline
+$ = E(X^{2}) - 2E(X)^{2}  + E(X)^{2}$
+\newline
+$ = E(X^{2}) - 2E(X) \cdot E(X) + E(X)^{2}$
+\newline
+$ = E(X^{2}) - E(2X) \cdot E(X) + E(X)^{2}$
+\newline
+$ = E(X^{2}) - E(2XE(X)) + E(X)^{2}$
+\newline
+$ = E(X^{2} - 2XE(X)) + E(X)^{2}$
+\newline
+$ = E(X^{2} - 2XE(X) + E(X)^{2})$
+\newline
+$ = E((X -  E(X))^{2})$
+\newline
+
+
+\end{document}

@@ -31,10 +31,10 @@
 
 \input kvmacros
 
-%GrÃƒÂ¶ÃƒÂŸe der RÃƒÂ¤nder setzen
+%GrÃ¶ÃŸe der RÃ¤nder setzen
 \geometry{a4paper,left=3cm, right=3cm, top=3cm, bottom=3cm}
 
-%Kopf- und FuÃƒÂŸzeile
+%Kopf- und FuÃŸzeile
 \pagestyle {fancy}
 \fancyhead[L]{Tutor: Benjamin Coban}
 \fancyhead[C]{Theoretische Informatik}
@@ -45,16 +45,16 @@
 \fancyfoot[R]{Seite \thepage /\pageref*{LastPage} }
 
 
-%Formatierung der ÃƒÂœberschrift, hier nichts ÃƒÂ¤ndern
+%Formatierung der Ãœberschrift, hier nichts Ã¤ndern
 \def\header#1#2{
 \begin{center}
-{\Large\bf Ãœbungsblatt #1} %Blatt eintragen
+{\Large\bf Übungsblatt #1} %Blatt eintragen
 
 {(Abgabetermin #2)}
 \end{center}
 }
 
-%Definition der Punktetabelle, hier nichts ÃƒÂ¤ndern
+%Definition der Punktetabelle, hier nichts Ã¤ndern
 \newcounter{punktelistectr}
 \newcounter{punkte}
 \newcommand{\punkteliste}[2]{%
@@ -118,16 +118,14 @@ Merle Kammer
 \section*{Aufgabe 1}
 \subsection*{a)}
 Bubblesort:\\
-Beim Durchlaufen des Arrays werden die jeweiligen Nachbarelemente miteinander verglichen  und ausgetauscht. \\
-Am Ende des ersten Durchlaufs befindet sich das grÃ¶ÃŸte Element am Ende des Arrays. Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das letzte Element. Danach hat man das zweitgrÃ¶ÃŸte Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Array sortiert ist.\\
+Beim Durchlaufen des Arrays werden die jeweiligen Nachbarelemente miteinander verglichen und ggf. ausgetauscht. Am Ende des ersten Laufs befindet sich das größte Element am Feldende. Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das letzte Element. Danach hat man das zweitgrößte Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Array sortiert ist.\\
 \newline
 \textbf{Pseudocode}\\
 \\
 \includegraphics[width=0.50\textwidth]{Bild}\\
 
 \noindent Beschreibung Minimumsort:\\
-Beim Durchlaufen des Arrays wird das kleinste Element auf min gesetzt und mit dem ersten Element getauscht.
-Am Ende des ersten Durchlaufs befindet sich das kleinste Element am Anfang des Ararys Dieser Vorgang wird nun erneut gestartet, allerdings diesmal ohne das erste  Element. Danach hat man das zweitkleinste Element gefunden. Der ganze Vorgang wird nun so oft wiederholt, bis das gesamte Array sortiert ist.
+Laufe ab Index 1 über die gesamte Folge und merke Dir den kleinsten Wert. Vertausche diesen Wert mit dem, der in der Folge an Stelle 2 steht. Somit erhältst du eine Folge, die bis Index 1 sortiert ist. Dann laufe ab Index 2 über diese Folge und merke Dir wieder den kleinsten Wert. Diesen vertauschst Du jetzt mit dem an Index 2 stehenden Wert. Die so entstandene neue Folge ist nun bereits bis Index 2 sortiert. Wiederhole diesen Vorgang bis Index (n-1). Nach diesen (n-1) Durchläufen erhaältst Du eine vollständig sortierte Folge, und der Algorithmus ist beendet.\\
 
 \textbf{Pseudocode}\\
 \\
@@ -135,18 +133,18 @@ Am Ende des ersten Durchlaufs befindet sich das kleinste Element am Anfang des A
 \newpage
 \subsection*{b)}
 Bubblesort vorsortierte Liste:\\
-Bei einer bereits sortierten Liste wird Bubblesort die Liste nur einmal durchgehen, um festzustellen, dass die Liste bereits sortiert ist, weil keine benachbarten Elemente vertauscht werden mussten. Daher benÃ¶tigt Bubblesort   ${O}(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Bei einer bereits sortierten Liste wird Bubblesort die Liste nur einmal durchgehen, um festzustellen, dass die Liste bereits sortiert ist, weil keine benachbarten Elemente vertauscht werden mussten. Daher benötigt Bubblesort   $0(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
 Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.\\
 \newline
 Minimum Sort vorsortiere Liste:\\
-Bei einer vorsortieren Liste muss MinSort mindestens einmal alle Zahlen vergleichen.Daher benÃ¶tigt auch MinSort   ${O}(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
+Bei einer vorsortieren Liste muss MinSort mindestens einmal alle Zahlen vergleichen.  .Daher benötigt auch MinSort   ${O}(n)$  Schritte, um eine bereits sortierte Liste zu bearbeiten.\\
 Insgesamt werden also (n - 1) Vergleiche und keine Vertauschungen vorgenommen.\\
 \newpage
 \subsection*{c + d)}
 Bubblesort:\\
-Bei absteigend sortierten Liste wird in jedem Durchlauf der inneren Schleife das erste Element bis zum n - 1 Element durchgetauscht (also n -1 viele  Vertausch-Operationen) und der Wert von n um 1 reduziert. Da dies die maximale Anzahl an Vertausch-Operationen und Vergleichs-Operationen pro Iteration und die maximale Anzahl an Iterationen liefert, ist dies der Worst-Case mit der Laufzeit $\Theta(n^{2})$.\\
+Bei absteigender Sortiertung einer Liste wird in jedem Durchlauf der inneren Schleife das erste Element bis zum n - 1 Element durchgetauscht (also n -1 viele  Vertausch-Operationen) und der Wert von n um 1 reduziert. Da dies die maximale Anzahl an Vertausch-Operationen pro Iteration und die maximale Anzahl an Iterationen liefert, ist dies der Worst-Case mit der Laufzeit $\Theta(n^{2})$.\\
 
-Insgesamt fÃ¼hrt Bubble Sort also hÃ¶chstens:\\
+Insgesamt führt Bubble Sort also höchstens:\\
 
 $\sum_{i=1}^{n-1} (n-i) = \sum_{j=1}^{n-1} j = \dfrac{n \cdot (n-1)}{2}$\\
 
@@ -177,9 +175,10 @@ Berechnung der max Vertauschungen:\\
 \hspace*{10mm} $\dfrac{5 \cdot (5-1)}{2} =$ 10 Vertauschungen  \\
 
 \noindent Minimum Sort:\\
-Beim Minimum Sort spielt der Inhalt des Eingabe-Arrays keine Rolle fÃ¼r die Anzahl an Vertausch-Operationen, da diese auf jeden Fall genau einmal in jeder Iteration der Ã¤uÃŸeren Schleife ausgefuÃ¼hrt werden und die Anzahl der Iterationen nur von der LÃ¤nge des Eingabe- Arrays abhÃ¤ngt.\\
-
-Insgesamt fÃ¼hrt MinSort also hÃ¶chstens:\\
+Beim Minimum Sort spielt der Inhalt des Eingabe-Arrays keine Rolle für die Anzahl an Vertausch-Operationen, da diese auf jeden Fall genau einmal in jeder Iteration der äußeren Schleife ausgefuührt werden und die Anzahl der Iterationen nur von der La?nge des Eingabe- Arrays abhängt.\\
+In der i-ten Phase benötigt MinSort n- i Vergleiche, aber nur eine Vertauschung. \\
+\\
+Insgesamt führt MinSort also höchstens:\\
 
 $(n-1)$\\
 
@@ -201,42 +200,7 @@ $(n-1)= 5 -1 =$ 4 Vergleiche  \\
 Berechnung der max Vertauschungen:\\
 $(n-1)= 5 -1 =$ 4 Vertauschungen  \\
 
-\newpage
 \section*{Aufgabe 2}
-Die Laufzeit von Quicksort ist im allgemeinen gegegen durch:\\
-\begin{align*} {T}(n) = {T}(k) + {T}(n-k) + {O}(n)
-\end{align*}\\
-wobei k das Pivotelemet ist (bzw. die Einteilung der Gruppen).\\
-\newline
-\noindent Damit die Eingabe stehts so geteilt wird, dass die Anzahl der kleinen Elemente doppelt so groÃŸ ist wie die der grÃ¶ÃŸten Elemente muss $k = \dfrac{2n}{3}$ sein!\\
-Es folgt:\\
-\begin{align*} {T}(n) = {T}(\dfrac{2n}{3}) + {T}(n - \dfrac{2n}{3}) + {O}(n)
-                                = {T}(\dfrac{2n}{3}) + {T}(\dfrac{n}{3}) + {O}(n)
-\end{align*}\\
-Behauptung: ${T}(n) \le c\cdot n \cdot log \cdot n  $ fÃ¼r konstante c\\
-Beweis:\\
-${T}(n) = c \cdot \dfrac{2n}{3} \cdot log  (\dfrac{2n}{3}) + c \cdot \dfrac{n}{3} \cdot log  (\dfrac{n}{3}) + O}(n)
-$\\
-\\
-\hspace*{8mm} $= c \cdot \dfrac{2n}{3} \cdot (log (n) - log  (\dfrac{3}{2}) + c \cdot \dfrac{n}{3} \cdot (log (n) -  log  (3)) + O}(n)
-$\\
-\\
-\hspace*{8mm} $= c \cdot \dfrac{2n}{3} \cdot log (n) - c \cdot \dfrac{2n}{3} \cdot log (\dfrac{3}{2}) + c \cdot \dfrac{n}{3} \cdot log (n) - c \cdot \dfrac{n}{3} log  (3) + O}(n)
-$\\
-\\
-\hspace*{8mm} $= c \cdot n \cdot log (n) - c \cdot \dfrac{n}{3} \cdot (2log(\dfrac{3}{2} + log (3)) +  O}(n)
-$\\
-\\
-\hspace*{8mm} $= c \cdot n \cdot log (n) - c \cdot n \cdot \dfrac{1}{3} \cdot log(\dfrac{27}{4}) +  O}(n)
-$\\
-\\
-\hspace*{8mm} $\le c \cdot n \cdot log (n)$ fÃ¼r $ c \cdot \dfrac{3}{log(\dfrac{27}{4})}
-\approx 1.08897$\\
-\\
-\noindent Da in der Aufgabe steht, dass $c \in N$ mÃ¼ssen wir $c \cdot \dfrac{3}{log(\dfrac{27}{4})}$ runden\\ 
-\noindent(aufrunden, da $\ge$ und c Mindeswert ist wir daher nicht abrunden kÃ¶nnen) \\
-\rightarrow c $ \ge $ 2 muss mindestens erfÃ¼llt sein!!
-\newpage
 
 \section*{Aufgabe 3}
 \subsection*{a)}
@@ -247,7 +211,7 @@ $A = \{9, 7, 21, 14, 88, 23, 10, 26, 13\}$
 \\
 \\
 \begin{figure}[h!]
-EinfÃ¼gen von 9
+Einfügen von 9
 \\
 \\
 \ovalbox{
@@ -262,7 +226,7 @@ EinfÃ¼gen von 9
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 7
+Einfügen von 7
 \\
 \\
 \ovalbox{
@@ -288,7 +252,7 @@ child {node [circle,draw] (a) {$9$}}
 
 \begin{figure}[h!]
 
-EinfÃ¼gen von 21
+Einfügen von 21
 \\
 \\
 \ovalbox{
@@ -302,7 +266,7 @@ child {node [circle,draw] (b) {$21$}}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 14
+Einfügen von 14
 \\
 \\
 \ovalbox{
@@ -318,7 +282,7 @@ child {node [circle,draw] (b) {$21$}}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 88
+Einfügen von 88
 \\
 \\
 \ovalbox{
@@ -335,7 +299,7 @@ child {node [circle,draw] (b) {$21$}}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 23
+Einfügen von 23
 \\
 \\
 \ovalbox{
@@ -354,7 +318,7 @@ child {node [circle,draw] (b) {$21$}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 10
+Einfügen von 10
 \\
 \\
 \ovalbox{
@@ -395,7 +359,7 @@ child {node [circle,draw] (b) {$10$}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 26
+Einfügen von 26
 \\
 \\
 \ovalbox{
@@ -417,7 +381,7 @@ child {node [circle,draw] (b) {$10$}
 \vspace{1cm}
 
 \begin{figure}[h!]
-EinfÃ¼gen von 13
+Einfügen von 13
 \\
 \\
 \ovalbox{
@@ -461,9 +425,10 @@ child {node [circle,draw] (b) {$10$}
 \end{tikzpicture}}
 \end{figure}
 \vspace{1cm}
+
+\subsection*{b)}
+EXTRACTMIN Operation ausführen und Heap-Eigenschaft wiederherstellen:
 \\
-Â¥\subsection*{b)}
-EXTRACTMIN Operation ausfÃ¼hren und Heap-Eigenschaft wiederherstellen:
 \\
 \begin{figure}[h!]
 \ovalbox{
@@ -487,7 +452,7 @@ child {node [circle,draw] (b) {$10$}
 \\
 \\
 \\
-Entnehme das Minimum d.h. die Wurzel des Baumes und fÃ¼ge 14 als neue Wurzel hinzu:
+Entnehme das Minimum d.h. die Wurzel des Baumes und füge 14 als neue Wurzel hinzu:
 \\
 \begin{figure}[h!]
 \ovalbox{
@@ -550,21 +515,8 @@ child {node [circle,draw] (b) {$10$}
 \\
 Dies ist der finale Heap, da die Heap-Eigenschaft nun komplett wiederhergestellt ist.
 \\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
-\\
 \subsection*{c)}
-Neues Element 6 zu Heap hinzufÃ¼gen:
+Neues Element 6 zu Heap hinzufügen:
 \begin{figure}[h!]
 \ovalbox{
 \begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
@@ -647,12 +599,11 @@ child {node [circle,draw] (b) {$10$}
 \end{tikzpicture}}
 \end{figure}
 \vspace{1cm}
-\pagebreak
 \subsection*{d)}
 
-Schritte in O-Notation um maximales Element aus dem Heap zu lÃ¶schen?
+Schritte in O-Notation um maximales Element aus dem Heap zu löschen?
 \\
-$\rightarrow$ man vergleicht alle BlÃ¤tter, aber nicht die Elternknoten, da diese nach der Heap-Eigenschaft nicht das grÃ¶ÃŸte Element sein kÃ¶nnen
+$\rightarrow$ man vergleicht alle Blätter, aber nicht die Elternknoten, da diese nach der Heap-Eigenschaft nicht das größte Element sein können
 \\
 \\
 Schritt 1: Das Maximum finden $\rightarrow$  $[\frac{n}{2}]$ mit n Anzahl der Elemente d.h. O($[\frac{n}{2}]$)
@@ -661,7 +612,7 @@ Schritt 1: Das Maximum finden $\rightarrow$  $[\frac{n}{2}]$ mit n Anzahl der El
 Schritt 2: Maximum an unterstes Blatt,, welches am weitesten rechts steht $\rightarrow$ O(1)
 \\
 \\
-Schritt 3: Heap-Eigenschaft wiederherstellen: max O($\log n$), da HÃ¶he von Baum ausgewogen
+Schritt 3: Heap-Eigenschaft wiederherstellen: max O($\log n$), da Höhe von Baum ausgewogen
 \\
 \\
 Schritt 4: Maximum aus Baum entfernen (Heap-Eigenschaft bleibt durch Schritt 1 immer erhalten) 
@@ -674,19 +625,19 @@ $\Omega = \{1, 2, 3, 4, 5, 6\}$
 \subsection*{a)}
 \begin{itemize}
 \item[(a)] 
-Die Wahrscheinlichkeit fÃ¼r das Ereignis $A=\{2\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{1}{6}$
+Die Wahrscheinlichkeit für das Ereignis $A=\{2\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{1}{6}$
 \item[(b)]
-Die Wahrscheinlichkeit fÃ¼r das Ereignis $A=\{2, 4, 6\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}$
+Die Wahrscheinlichkeit für das Ereignis $A=\{2, 4, 6\}$ ist: $P(A)=\frac{|A|}{|\Omega|}=\frac{3}{6}$
 \end{itemize}
 \subsection*{b)}
 Zu zeige: Falls $A \cap B = \emptyset$, dann gilt $P(A \cap B)=P(A)+P(B)$\\
 (1)
 \begin{align*}
 P(A \cup B) &\overset{(*)}{=} P((A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A))\\
-&= P(A \setminus B) + P(A \cap B) + P(B \setminus A) \ \ \leftarrow \sigma \textrm{-additivitÃ¤t}\\
+&= P(A \setminus B) + P(A \cap B) + P(B \setminus A) \ \ \leftarrow \sigma \textrm{-additivität}\\
 &= \underbrace{P(A \setminus B) + P(A \cap B)}_{= P(A)} + \underbrace{P(B \setminus A) + P(A \cap B)}_{=P(B)} - P(A \cap B)\\
 &= P(A) + P(B) + P(A \cap B)\\
-&\textrm{fÃ¼r $A \cap B = \emptyset$ gilt somit}\\
+&\textrm{für $A \cap B = \emptyset$ gilt somit}\\
 &= P(A) + P(B) \hspace{7cm} \Box
 \end{align*}
 (*):\\
@@ -714,12 +665,12 @@ $A \cup B = (A \setminus B) \dot\cup (A \cap B) \dot\cup (B \setminus A)$\\
       (-2,-2) rectangle (3,2) node [text=black,above] {$\Omega$};
 \end{tikzpicture}\\
 \\
-FÃ¼r $A \cap B \neq \emptyset$ gilt $P(A \cup B) \le P(A)+P(B)$ denn:\\
+Für $A \cap B \neq \emptyset$ gilt $P(A \cup B) \le P(A)+P(B)$ denn:\\
 $P(A \cup B)=P(A) +P(B) - P(A \cap B) \leftarrow$ siehe Beweis (1)\\
 $\Rightarrow P(A \cup B) \le P(A)+P(B)$
 \subsection*{c)}
 $\Omega = \{1, 2, 3, 4, 5, 6\}^3$\\
-Das Ereignis, dass "Alle drei WÃ¼rfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit fÃ¼r dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
+Das Ereignis, dass "Alle drei Würfel ein Auge zeigen ist $A=\{(1, 1, 1)\}$. Die Wahrscheinlichkeit für dieses Ereignis ist: $P(A)=P(\{(1, 1, 1)\})=\frac{|\{(1, 1, 1)\}|}{|\Omega|}= \frac{1}{6^3}=\frac{1}{216}$
 \newpage
 \subsection*{d)}
 $\Omega = \{1, 2, 3, 4,5 ,6\}^2$
@@ -727,11 +678,11 @@ $\Omega = \{1, 2, 3, 4,5 ,6\}^2$
 \item[(a)]
 \begin{align*}
 [X=4]&=\{(x,y) \in \Omega \ | \ X(x,y)=4\}\\
-&=\{(4,4),(4,5),(5,4),(4,6),(6,4)\}
+&=\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}
 \end{align*}
-Es werden zwei WÃ¼rfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der WÃ¼rfel eine 4 zeigt und die Augenzahl des anderen WÃ¼rfels $\ge 4$ ist. Das heiÃŸt das Minimum der gewÃ¼rfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
+Es werden zwei Würfel geworfen. Das Ereignis $[X=4]$ tritt ein, wenn einer der Würfel eine 4 zeigt und die Augenzahl des anderen Würfels $\ge 4$ ist. Das heißt das Minimum der gewürfelten Augenzahlen muss 4 sein, damit das Ereignis $[X=4]$ eintrifft.
 \item[(b)]
-$P([X=4])=P(\{(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
+$P([X=4])=P(\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\})=\frac{|\{(4,4),(4,4),(4,5),(5,4),(4,6),(6,4)\}|}{|\Omega|}=\frac{6}{6^2}=\frac{6}{36}=\frac{1}{6}$\\
 Unter Annahme der Gleichverteilung der Ereignisse ist $P([X=4])=\frac{1}{6}$.
 \end{itemize}
 
